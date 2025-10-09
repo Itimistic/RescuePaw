@@ -1,5 +1,6 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom"
 import DonationPage from "./pages/DonationPage"
+import PetListPage from "./pages/PetListPage"
 // import Dashboard from "./pages/Dashboard"
 // import Login from "./pages/Login"
 // import Register from "./pages/Register"
@@ -14,7 +15,7 @@ function App() {
   return (
     <BrowserRouter>
         <Routes>
-          <Route path="/" element={<DonationPage />} />
+          <Route path="/pet_list" element={< PetListPage />} />
         </Routes>
     </BrowserRouter>
   )
