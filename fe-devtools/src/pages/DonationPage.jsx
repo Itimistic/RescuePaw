@@ -2,11 +2,10 @@ import a4 from "../assets/donation/a4.png"
 import heart from "../assets/donation/heart.png"
 import donate from "../assets/donation/donate.png"
 import DonationSection from "../components/DonationSection"
-
+import dog_cat from "../assets/donation/dog_cat.jpg"
 const DonationPage = () => {
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-amber-400 relative pt-25">
-      {/* Top Section */}
       <div className="text-center relative z-20">
         <img src={heart} alt="heart" className="w-[55px] mx-auto mb-2" />
         <h1 className="text-5xl font-bold text-white">Hearts & Paws</h1>
@@ -14,14 +13,11 @@ const DonationPage = () => {
       </div>
 
       <div className="relative w-full flex justify-center z-30 -mt-10">
-        {/* donate อยู่ด้านหลัง */}
         <img
           src={donate}
           alt="donate"
           className="absolute top-1/2 -translate-y-1/2 w-full opacity-30 z-10"
         />
-
-        {/* animal อยู่ด้านหน้า */}
         <img
           src={a4}
           alt="animal"
@@ -29,19 +25,70 @@ const DonationPage = () => {
         />
       </div>
 
-
-      {/* Bottom Section */}
       <div className="bg-white w-full text-center px-6 py-6 relative z-10">
         <h1 className="text-3xl font-bold leading-relaxed text-gray-800">
           <span className="text-amber-500">Just a little of your kindness</span> can{" "}
           <span className="text-amber-500">change the lives</span> of dogs and cats{" "}
           <span className="text-amber-500">waiting for hope.</span>
         </h1>
-        <p className="mt-4 text-gray-600">
+        <p className="mt-1 font-medium text-gray-600">
           Your support helps us provide food, shelter, and love for stray dogs and cats.
         </p>
       </div>
-      <DonationSection />
+      <section id="donation" className="py-20 lg:px-32 bg-white w-full">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-12">
+            <h2 className="text-4xl font-bold text-gray-800 mb-4">บริจาคเพื่อช่วยเหลือสัตว์จรจัด</h2>
+            <p className="text-xl text-gray-600">
+              การบริจาคของคุณช่วยให้หมาและแมวจรจัดมีอาหาร, ยารักษา และที่อยู่อาศัยที่ปลอดภัย
+            </p>
+          </div>
+
+          <div className="flex justify-between gap-10">
+            <div className="rounded-3xl p-12 w-full flex flex-col gap-8 shadow-2xl">
+              <DonationSection />
+            </div>
+            <div className="rounded-3xl shadow-2xl p-6 md:p-8 lg:max-w-1/3 flex flex-col gap-6 max-h-fit">
+                <img src={dog_cat} alt="สัตว์จรจัด" className="rounded-2xl object-cover" />
+                <h3 className="text-2xl font-bold text-gray-800 mb-3">เรื่องราวของสัตว์จรจัด</h3>
+
+                <div className="flex flex-col gap-5">
+                    <div className="border-l-4 border-amber-400 pl-4">
+                    <h4 className="font-semibold text-lg text-gray-800">น้องหมาจรจากชุมชนเมือง</h4>
+                    <p className="text-gray-600 text-sm">
+                        น้องหมาตัวนี้ถูกพบในซอยเล็ก ๆ ของกรุงเทพฯ ทีมงานเราได้นำอาหารและน้ำไปให้ทุกวันจนเริ่มคุ้นเคย
+                        การบริจาคของคุณช่วยให้เราสามารถดูแลและหาบ้านใหม่ให้กับน้องหมาเหล่านี้ได้
+                    </p>
+                    </div>
+
+                    <div className="border-l-4 border-amber-400 pl-4">
+                    <h4 className="font-semibold text-lg text-gray-800">น้องแมวที่ถูกทิ้ง</h4>
+                    <p className="text-gray-600 text-sm">
+                        น้องแมวหลายตัวถูกทิ้งตามชุมชน ทีมงานของเรานำอาหาร วัคซีน และที่พักพิงชั่วคราวให้
+                        บริจาคของคุณช่วยสร้างความปลอดภัยและสุขภาพที่ดีให้พวกเขา
+                    </p>
+                    </div>
+                    
+                    <div className="border-l-4 border-amber-400 pl-4">
+                    <h4 className="font-semibold text-lg text-gray-800">การทำหมันสัตว์</h4>
+                    <p className="text-gray-600 text-sm">
+                        การทำหมันสัตว์ช่วยควบคุมจำนวนประชากรสัตว์จรจัด ลดความทุกข์ทรมานของสัตว์ และป้องกันการแพร่โรค
+                        ทุกการบริจาคช่วยให้โครงการนี้ดำเนินต่อไปได้
+                    </p>
+                    </div>
+
+                    <div className="border-l-4 border-amber-400 pl-4">
+                    <h4 className="font-semibold text-lg text-gray-800">ความสำคัญของการบริจาค</h4>
+                    <p className="text-gray-600 text-sm">
+                        เงินบริจาคของคุณถูกใช้ในการซื้ออาหาร ยารักษาโรค วัคซีน และอุปกรณ์ดูแลสัตว์
+                        ทุกบาทมีค่าต่อชีวิตของสัตว์จรจัดและสร้างความหวังให้กับพวกเขา
+                    </p>
+                    </div>
+                </div>
+            </div>
+          </div>
+        </div>
+      </section>
     </div>
   )
 }

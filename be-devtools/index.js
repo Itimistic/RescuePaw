@@ -2,10 +2,14 @@ require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
 const app = express()
+const { v4: uuidv4 } = require("uuid");
 
 const sequelize = require("./config/dbconn")
 const userRoutes = require("./routes/userRoutes")
+const donateRoutes = require("./routes/donateRoutes")
+const webhookRoutes = require("./routes/webhookRoutes")
 
+app.use("/webhook", webhookRoutes)
 // app.use(cors()); 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -19,6 +23,7 @@ app.use(cors({
 
 // Routes
 app.use("/api/users", userRoutes)
+app.use("/api/donate", donateRoutes)
 
 sequelize
 .sync()
