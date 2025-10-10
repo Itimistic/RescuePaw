@@ -5,6 +5,7 @@ const app = express()
 
 const sequelize = require("./config/dbconn")
 const userRoutes = require("./routes/userRoutes")
+const reportRoutes = require("./routes/reportRoutes")
 
 // app.use(cors()); 
 app.use(express.json());
@@ -19,6 +20,7 @@ app.use(cors({
 
 // Routes
 app.use("/api/users", userRoutes)
+app.use("/api/report", reportRoutes);
 
 sequelize
 .sync()
@@ -31,5 +33,9 @@ sequelize
 app.get("/", (req, res) => {
     res.send("Hello World")
 })
+
+// app.get("/reportform", (req, res) -> {
+//     res.render("report");
+// })
 
 app.listen(process.env.PORT, () => console.log(`Server is running on http://localhost:${process.env.PORT}`))

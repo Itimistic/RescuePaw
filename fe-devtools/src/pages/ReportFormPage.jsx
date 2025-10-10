@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 import "../reportform.css";
 
@@ -29,11 +29,45 @@ function ReportFormPage() {
     }
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log("ข้อมูลที่ส่ง:", formData);
 
-  };
+    useEffect(() => {
+        const form = new FormData();
+            for (const key in formData) {
+            form.append(key, formData[key]);
+    }});
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+    
+        const payload = {
+            event: formData.event,
+            location: formData.location,
+            date: formData.date,
+            time: formData.time,
+            details: formData.details,
+            image: formData.image ? formData.image.name : null, // Send only the image name
+        };
+
+        try {
+            const response = await fetch(`${import.meta.env.VITE_API_SERVER_BASE_URL}/api/report`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(payload),
+            });
+
+            if (!response.ok) {
+                throw new Error("Network response was not ok");
+            }
+            const data = await response.json();
+            console.log("Response:", data);
+            alert("ส่งรายงานสำเร็จ!");
+        } catch (err) {
+            console.log("Error:", err);
+            alert("เกิดข้อผิดพลาดในการส่งข้อมูล");
+        }
+    };
 
   return (
     <div className="form-container">
@@ -92,6 +126,9 @@ function ReportFormPage() {
         )}
 
         <button type="submit">ส่งรายงาน</button>
+
+        
+
       </form>
     </div>
   );
