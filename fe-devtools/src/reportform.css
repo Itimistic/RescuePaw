@@ -1,0 +1,61 @@
+.form-container {
+  max-width: 500px;
+  margin: 50px auto;
+  padding: 25px 30px;
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  font-family: "Prompt", sans-serif;
+}
+
+
+.form-container h2 {
+  text-align: center;
+  margin-bottom: 25px;
+  color: #333;
+}
+
+.report-form {
+  display: flex;
+  flex-direction: column;
+}
+
+
+.report-form label {
+  margin: 10px 0 5px;
+  font-weight: 500;
+  color: #444;
+}
+
+.report-form input,
+.report-form textarea {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  outline: none;
+  font-size: 15px;
+  transition: border-color 0.2s ease;
+}
+
+.report-form input:focus,
+.report-form textarea:focus {
+  border-color: #ff7300;
+  box-shadow: 0 0 3px rgba(251, 154, 50, 0.3);
+}
+
+.report-form button {
+  margin-top: 20px;
+  padding: 10px;
+  background-color: #ff7300;
+  color: white;
+  font-size: 16px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+/* 🔹 เอฟเฟกต์ hover */
+.report-form button:hover {
+  background-color: #bd5a02;
+}

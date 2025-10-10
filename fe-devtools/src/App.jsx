@@ -8,6 +8,7 @@ import DonationPage from "./pages/DonationPage"
 // import Profile from "./pages/Profile"
 // import Communities from "./pages/Communities"
 // import { AuthProvider } from "./hooks/userAuth"
+import ReportFormPage from "./pages/ReportFormPage"
 
 function App() {
 
@@ -15,6 +16,7 @@ function App() {
     <BrowserRouter>
         <Routes>
           <Route path="/" element={<DonationPage />} />
+          <Route path="/reportform" element={<ReportFormPage />} />
         </Routes>
     </BrowserRouter>
   )
