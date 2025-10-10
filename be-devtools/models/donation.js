@@ -30,33 +30,6 @@ const Donation = sequelize.define("Donation", {
         type: DataTypes.BOOLEAN,
         defaultValue: false
     },
-
 })
 
 module.exports = Donation
-
-/**
- 
-donation table
-- id
-- donation_type
-- amount
-- donor_name
-- donor_email
-- slip_image
-- status
-- email_sent (true, false)
-
-recurring_donation table
-- id
-- donation_id
-- next_payment_date
-- active
-
-admin table
-- id
-- username
-- password
-- role
-
- */

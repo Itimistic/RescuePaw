@@ -11,7 +11,7 @@ const DonationSection = () => {
 
   const [donorName, setDonorName] = useState("");
   const [donorEmail, setDonorEmail] = useState("");
-  const [donationType, setDonationType] = useState("");
+  const [donationType, setDonationType] = useState("one-time");
   const [donationAmount, setDonationAmount] = useState("");
   const [customAmount, setCustomAmount] = useState("");
   const [impactMessage, setImpactMessage] = useState("");
@@ -101,17 +101,17 @@ const DonationSection = () => {
       
       <div>
         <label className="block text-lg font-semibold text-gray-800 mb-4">ประเภทการบริจาค</label>
-        <div className="grid grid-cols-2 gap-4">
+        <div>
           <button
             onClick={() => setDonationType("one-time")}
-            className={`p-4 font-semibold rounded-xl transition ${donationType === "one-time"
+            className={`p-4 w-full font-semibold rounded-xl transition ${donationType === "one-time"
                 ? " bg-amber-100 text-amber-600"
                 : "bg-stone-300"
               }`}
           >
             บริจาคครั้งเดียว
           </button>
-          <button
+          {/* <button
             onClick={() => setDonationType("monthly")}
             className={`p-4 rounded-xl transition font-semibold ${donationType === "monthly"
                 ? " bg-amber-100 text-amber-600 font-semibold"
@@ -119,7 +119,7 @@ const DonationSection = () => {
               }`}
           >
             บริจาครายเดือน
-          </button>
+          </button> */}
         </div>
       </div>
 

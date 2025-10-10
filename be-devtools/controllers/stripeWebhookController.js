@@ -4,7 +4,7 @@ const Donation = require("../models/donation");
 
 exports.handleStripeWebhook = async (req, res) => {
     let event = req.body;
-    // console.log(event)
+    console.log(event)
     //Only verify the event if you have an endpoint secret defined.
     // Otherwise use the basic event deserialized with JSON.parse
     if (endpointSecret) {

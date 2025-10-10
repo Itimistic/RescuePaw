@@ -5,7 +5,7 @@ const app = express()
 const { v4: uuidv4 } = require("uuid");
 
 const sequelize = require("./config/dbconn")
-const userRoutes = require("./routes/userRoutes")
+const adminRoutes = require("./routes/adminRoutes")
 const donateRoutes = require("./routes/donateRoutes")
 const webhookRoutes = require("./routes/webhookRoutes")
 
@@ -22,8 +22,9 @@ app.use(cors({
 }));  
 
 // Routes
-app.use("/api/users", userRoutes)
+// app.use("/api/users", userRoutes)
 app.use("/api/donate", donateRoutes)
+app.use("/api/admin", adminRoutes)
 
 sequelize
 .sync()

@@ -17,7 +17,7 @@ exports.createDonation = async (req, res) => {
                     currency: "thb",
                     product_data: {
                     name:
-                        donation_type === "per-month"
+                        donation_type === "monthly"
                         ? "Monthly Donation"
                         : "One-Time Donation",
                     },
@@ -26,7 +26,7 @@ exports.createDonation = async (req, res) => {
                 quantity: 1,
                 },
             ],
-            mode: donation_type === "per-month" ? "subscription" : "payment",
+            mode: donation_type === "monthly" ? "subscription" : "payment",
             success_url: `${process.env.API_CLIENT_BASE_URL}/donate/success?order_id=${orderId}`,
             cancel_url: `${process.env.API_CLIENT_BASE_URL}/donate/cancel?order_id=${orderId}`,
             customer_email: email, // Stripe จะใช้แสดงในหน้า checkout ด้วย

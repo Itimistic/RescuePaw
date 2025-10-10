@@ -35,7 +35,7 @@ const DonationPage = () => {
           Your support helps us provide food, shelter, and love for stray dogs and cats.
         </p>
       </div>
-      <section id="donation" className="py-20 lg:px-32 bg-white w-full">
+      <section id="donation" className="py-20 lg:px-32 bg-gradient-to-b from-amber-50 to-amber-50 w-full">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-12">
             <h2 className="text-4xl font-bold text-gray-800 mb-4">บริจาคเพื่อช่วยเหลือสัตว์จรจัด</h2>
@@ -45,10 +45,10 @@ const DonationPage = () => {
           </div>
 
           <div className="flex justify-between gap-10">
-            <div className="rounded-3xl p-12 w-full flex flex-col gap-8 shadow-2xl">
+            <div className="rounded-3xl p-12 w-full flex bg-white flex-col gap-8 shadow-2xl">
               <DonationSection />
             </div>
-            <div className="rounded-3xl shadow-2xl p-6 md:p-8 lg:max-w-1/3 flex flex-col gap-6 max-h-fit">
+            <div className="rounded-3xl shadow-2xl p-6 bg-white md:p-8 lg:max-w-1/3 flex flex-col gap-6 max-h-fit">
                 <img src={dog_cat} alt="สัตว์จรจัด" className="rounded-2xl object-cover" />
                 <h3 className="text-2xl font-bold text-gray-800 mb-3">เรื่องราวของสัตว์จรจัด</h3>
 
