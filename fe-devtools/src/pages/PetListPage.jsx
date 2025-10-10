@@ -1,7 +1,6 @@
 import { useState } from "react";
 import heart from "../assets/pet_list/heart.png";
 import a4 from "../assets/pet_list/a4.png"
-import donate from "../assets/pet_list/donate.png"
 import PetListSection from "../components/PetListSection";
 
 const PetListPage = () => {

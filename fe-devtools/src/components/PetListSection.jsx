@@ -1,145 +1,77 @@
-import { useState } from "react";
-import { Search, Filter, Heart, Calendar, MapPin } from "lucide-react";
+import { useEffect, useState } from "react";
+import { Search, Filter, Heart, Calendar, House } from "lucide-react";
 
 const PetListSection = () => {
-  // Mock data สำหรับสัตว์
-  const mockPets = [
-    {
-      id: 1,
-      name: "ลัคกี้",
-      type: "สุนัข",
-      breed: "ลูกผสม",
-      age: "2 ปี",
-      gender: "ตัวผู้",
-      size: "กลาง",
-      location: "กรุงเทพฯ",
-      image: "https://images.unsplash.com/photo-1543466835-00a7907e9de1?w=500",
-      description: "น้องลัคกี้เป็นสุนัขที่ร่าเริงและเป็นมิตร ชอบเล่นกับคน เหมาะกับครอบครัวที่มีเด็ก",
-      vaccinated: true,
-      sterilized: true
-    },
-    {
-      id: 2,
-      name: "มิว",
-      type: "แมว",
-      breed: "ไทย",
-      age: "1 ปี",
-      gender: "ตัวเมีย",
-      size: "เล็ก",
-      location: "กรุงเทพฯ",
-      image: "https://images.unsplash.com/photo-1574158622682-e40e69881006?w=500",
-      description: "น้องมิวเป็นแมวที่สงบและน่ารัก ชอบนอนตักและเล่นกับของเล่น",
-      vaccinated: true,
-      sterilized: true
-    },
-    {
-      id: 3,
-      name: "บราวนี่",
-      type: "สุนัข",
-      breed: "โกลเด้นรีทรีฟเวอร์ผสม",
-      age: "3 ปี",
-      gender: "ตัวเมีย",
-      size: "ใหญ่",
-      location: "นนทบุรี",
-      image: "https://images.unsplash.com/photo-1552053831-71594a27632d?w=500",
-      description: "น้องบราวนี่เป็นสุนัขที่ฉลาดและภักดี ชอบออกกำลังกายและว่ายน้ำ",
-      vaccinated: true,
-      sterilized: false
-    },
-    {
-      id: 4,
-      name: "ซูชิ",
-      type: "แมว",
-      breed: "เปอร์เซีย",
-      age: "4 ปี",
-      gender: "ตัวผู้",
-      size: "กลาง",
-      location: "สมุทรปราการ",
-      image: "https://images.unsplash.com/photo-1568152950566-c1bf43f4ab28?w=500",
-      description: "น้องซูชิเป็นแมวที่สง่างามและชอบความสะอาด เหมาะกับคนที่อยู่คอนโด",
-      vaccinated: true,
-      sterilized: true
-    },
-    {
-      id: 5,
-      name: "แม็กซ์",
-      type: "สุนัข",
-      breed: "บีเกิล",
-      age: "1 ปี",
-      gender: "ตัวผู้",
-      size: "กลาง",
-      location: "ปทุมธานี",
-      image: "https://images.unsplash.com/photo-1505628346881-b72b27e84530?w=500",
-      description: "น้องแม็กซ์เป็นสุนัขที่กระตือรือร้นและชอบผจญภัย เหมาะกับคนที่ชอบกิจกรรมกลางแจ้ง",
-      vaccinated: true,
-      sterilized: true
-    },
-    {
-      id: 6,
-      name: "ลูน่า",
-      type: "แมว",
-      breed: "สีดำ",
-      age: "6 เดือน",
-      gender: "ตัวเมีย",
-      size: "เล็ก",
-      location: "กรุงเทพฯ",
-      image: "https://images.unsplash.com/photo-1529778873920-4da4926a72c2?w=500",
-      description: "น้องลูน่าเป็นลูกแมวที่ซนและน่ารัก ชอบเล่นและสำรวจสิ่งใหม่ ๆ",
-      vaccinated: false,
-      sterilized: false
-    },
-    {
-      id: 7,
-      name: "จอร์จ",
-      type: "สุนัข",
-      breed: "ชิสุ",
-      age: "5 ปี",
-      gender: "ตัวผู้",
-      size: "เล็ก",
-      location: "กรุงเทพฯ",
-      image: "https://images.unsplash.com/photo-1583511655857-d19b40a7a54e?w=500",
-      description: "น้องจอร์จเป็นสุนัขที่อ่อนโยนและชอบความสงบ เหมาะกับผู้สูงอายุ",
-      vaccinated: true,
-      sterilized: true
-    },
-    {
-      id: 8,
-      name: "มาร์ลีย์",
-      type: "แมว",
-      breed: "ส้มลาย",
-      age: "2 ปี",
-      gender: "ตัวผู้",
-      size: "กลาง",
-      location: "นนทบุรี",
-      image: "https://images.unsplash.com/photo-1592194996308-7b43878e84a6?w=500",
-      description: "น้องมาร์ลีย์เป็นแมวที่รักการเล่นและมีพลังงานสูง ชอบไล่จับของเล่น",
-      vaccinated: true,
-      sterilized: true
-    }
-  ];
+  // State สำหรับข้อมูลสัตว์
+  const [pets, setPets] = useState([]);
+  const [filteredPets, setFilteredPets] = useState([]);
 
   // State สำหรับการกรองและค้นหา
   const [searchTerm, setSearchTerm] = useState("");
-  const [filterType, setFilterType] = useState("ทั้งหมด");
-  const [filterGender, setFilterGender] = useState("ทั้งหมด");
-  const [filterSize, setFilterSize] = useState("ทั้งหมด");
+  const [filterSpecies, setFilterSpecies] = useState("All");
+  const [filterGender, setFilterGender] = useState("All");
+  const [filterSize, setFilterSize] = useState("All");
+  const [filterStatus, setFilterStatus] = useState("All");
   const [selectedPet, setSelectedPet] = useState(null);
 
-  // กรองข้อมูล
-  const filteredPets = mockPets.filter((pet) => {
-    const matchSearch = pet.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                       pet.breed.toLowerCase().includes(searchTerm.toLowerCase());
-    const matchType = filterType === "ทั้งหมด" || pet.type === filterType;
-    const matchGender = filterGender === "ทั้งหมด" || pet.gender === filterGender;
-    const matchSize = filterSize === "ทั้งหมด" || pet.size === filterSize;
+  // ดึงข้อมูลสัตว์จาก API
+  useEffect(() => {
+    const getPet = async () => {
+      try {
+        const res = await fetch(`${import.meta.env.VITE_API_SERVER_BASE_URL}/api/pets`, {
+          method: "GET",
+          headers: { "Content-Type": "application/json" },
+        });
 
-    return matchSearch && matchType && matchGender && matchSize;
-  });
+        const data = await res.json();
+        console.log("data:", data);
+        setPets(data.data);
+        setFilteredPets(data.data);
+      } catch (error) {
+        console.log("error:", error);
+      }
+    };
+    getPet();
+  }, []);
+
+  // ฟิลเตอร์ข้อมูลเมื่อผู้ใช้เปลี่ยน search หรือ filter
+  useEffect(() => {
+    let filtered = pets;
+
+    // กรองตามคำค้นหา
+    if (searchTerm) {
+      filtered = filtered.filter(
+        (pet) =>
+          pet.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+          pet.breed.toLowerCase().includes(searchTerm.toLowerCase())
+      );
+    }
+
+    // กรองตามประเภท
+    if (filterSpecies !== "All") {
+      filtered = filtered.filter((pet) => pet.species === filterSpecies);
+    }
+
+    // กรองตามเพศ
+    if (filterGender !== "All") {
+      filtered = filtered.filter((pet) => pet.gender === filterGender);
+    }
+
+    // กรองตามขนาด
+    if (filterSize !== "All") {
+      filtered = filtered.filter((pet) => pet.size === filterSize);
+    }
+
+    if (filterStatus !== "All") {
+      filtered = filtered.filter((pet) => pet.status === filterStatus);
+    }
+
+    setFilteredPets(filtered);
+  }, [searchTerm, filterSpecies, filterGender, filterSize, filterStatus, pets]);
 
   return (
     <section className="py-12 lg:px-32 bg-gradient-to-b from-white to-green-200 w-full">
       <div className="max-w-7xl mx-auto px-4">
-        
         {/* Search and Filter Section */}
         <div className="bg-white rounded-2xl shadow-xl p-6 mb-8">
           {/* Search Bar */}
@@ -147,10 +79,10 @@ const PetListSection = () => {
             <div className="relative">
               <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-500 w-5 h-5" />
               <input
-                type="text"
+                species="text"
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                placeholder="ค้นหาชื่อหรือสายพันธุ์..."
+                placeholder="Search by name or breed..."
                 className="w-full pl-12 pr-4 py-3 rounded-xl border-2 border-gray-300 focus:border-green-500 focus:outline-none"
               />
             </div>
@@ -159,50 +91,64 @@ const PetListSection = () => {
           {/* Filters */}
           <div className="flex items-center gap-2 mb-4">
             <Filter className="w-5 h-5 text-gray-600" />
-            <span className="font-semibold text-gray-700">กรองตาม:</span>
+            <span className="font-semibold text-gray-700">Filter by:</span>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            {/* Type Filter */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {/* species Filter */}
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">ประเภท</label>
+              <label className="block text-sm font-medium text-gray-700 mb-2">Species</label>
               <select
-                value={filterType}
-                onChange={(e) => setFilterType(e.target.value)}
+                value={filterSpecies}
+                onChange={(e) => setFilterSpecies(e.target.value)}
                 className="w-full px-4 py-2 rounded-lg border-2 border-gray-300 focus:border-green-500 focus:outline-none"
               >
-                <option>ทั้งหมด</option>
-                <option>สุนัข</option>
-                <option>แมว</option>
+                <option value="">All</option>
+                <option value="dog">Dog</option>
+                <option value="cat">Cat</option>
               </select>
             </div>
 
             {/* Gender Filter */}
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">เพศ</label>
+              <label className="block text-sm font-medium text-gray-700 mb-2">Gender</label>
               <select
                 value={filterGender}
                 onChange={(e) => setFilterGender(e.target.value)}
                 className="w-full px-4 py-2 rounded-lg border-2 border-gray-300 focus:border-green-500 focus:outline-none"
               >
-                <option>ทั้งหมด</option>
-                <option>ตัวผู้</option>
-                <option>ตัวเมีย</option>
+                <option value="">All</option>
+                <option value="male">Male</option>
+                <option value="female">Female</option>
               </select>
             </div>
 
             {/* Size Filter */}
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">ขนาด</label>
+              <label className="block text-sm font-medium text-gray-700 mb-2">Size</label>
               <select
                 value={filterSize}
                 onChange={(e) => setFilterSize(e.target.value)}
                 className="w-full px-4 py-2 rounded-lg border-2 border-gray-300 focus:border-green-500 focus:outline-none"
               >
-                <option>ทั้งหมด</option>
-                <option>เล็ก</option>
-                <option>กลาง</option>
-                <option>ใหญ่</option>
+                <option value="">All</option>
+                <option value="small">Small</option>
+                <option value="medium">Medium</option>
+                <option value="large">Large</option>
+              </select>
+            </div>
+
+            {/* Status Filter */}
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">Status</label>
+              <select
+                value={filterStatus}
+                onChange={(e) => setFilterStatus(e.target.value)}
+                className="w-full px-4 py-2 rounded-lg border-2 border-gray-300 focus:border-green-500 focus:outline-none"
+              >
+                <option value="">All</option>
+                <option value="available">Available</option>
+                <option value="adopted">Adopted</option>
               </select>
             </div>
           </div>
@@ -211,7 +157,7 @@ const PetListSection = () => {
         {/* Results Count */}
         <div className="mb-6">
           <p className="text-gray-600">
-            พบ <span className="font-bold text-green-600">{filteredPets.length}</span> ตัว
+            find <span className="font-bold text-green-600">{filteredPets.length}</span> result.
           </p>
         </div>
 
@@ -226,7 +172,7 @@ const PetListSection = () => {
               {/* Pet Image */}
               <div className="relative h-64 overflow-hidden">
                 <img
-                  src={pet.image}
+                  src={pet.image || "/placeholder.jpg"}
                   alt={pet.name}
                   className="w-full h-full object-cover"
                 />
@@ -234,7 +180,7 @@ const PetListSection = () => {
                   <Heart className="w-5 h-5 text-green-500" />
                 </div>
                 <div className="absolute top-3 left-3 bg-green-500 text-white px-3 py-1 rounded-full text-sm font-semibold">
-                  {pet.type}
+                  {pet.species}
                 </div>
               </div>
 
@@ -246,29 +192,19 @@ const PetListSection = () => {
                 <div className="flex items-center gap-4 text-sm text-gray-600 mb-3">
                   <div className="flex items-center gap-1">
                     <Calendar className="w-4 h-4" />
-                    <span>{pet.age}</span>
+                    <span>{pet.age} years</span>
                   </div>
+                </div>
+
+                <div className="flex items-center gap-4 text-sm text-gray-600 mb-3">
                   <div className="flex items-center gap-1">
-                    <MapPin className="w-4 h-4" />
-                    <span>{pet.location}</span>
+                    <House className="w-4 h-4" />
+                    <span>{pet.status}</span>
                   </div>
                 </div>
 
-                <div className="flex gap-2 mb-4">
-                  {pet.vaccinated && (
-                    <span className="bg-green-100 text-green-700 px-2 py-1 rounded-full text-xs font-medium">
-                      ฉีดวัคซีนแล้ว
-                    </span>
-                  )}
-                  {pet.sterilized && (
-                    <span className="bg-blue-100 text-blue-700 px-2 py-1 rounded-full text-xs font-medium">
-                      ทำหมันแล้ว
-                    </span>
-                  )}
-                </div>
-
-                <button className="w-full bg-green-500 text-white py-2 rounded-lg font-semibold hover:bg-green-500 transition">
-                  ดูรายละเอียด
+                <button className="w-full bg-green-500 text-white py-2 rounded-lg font-semibold hover:bg-green-600 transition">
+                  Learn more
                 </button>
               </div>
             </div>
@@ -278,8 +214,8 @@ const PetListSection = () => {
         {/* No Results */}
         {filteredPets.length === 0 && (
           <div className="text-center py-16">
-            <p className="text-gray-500 text-xl">ไม่พบสัตว์ที่ตรงกับเงื่อนไขที่คุณค้นหา</p>
-            <p className="text-gray-500 mt-2">ลองปรับเปลี่ยนเงื่อนไขการค้นหาใหม่</p>
+            <p className="text-gray-500 text-xl">No pets match your search criteria,</p>
+            <p className="text-gray-500 mt-2">Try adjusting your filters and search terms.</p>
           </div>
         )}
       </div>
