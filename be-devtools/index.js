@@ -5,6 +5,7 @@ const app = express()
 
 const sequelize = require("./config/dbconn")
 const userRoutes = require("./routes/userRoutes")
+const petRoutes = require("./routes/petRoutes")
 
 // app.use(cors()); 
 app.use(express.json());
@@ -19,6 +20,7 @@ app.use(cors({
 
 // Routes
 app.use("/api/users", userRoutes)
+app.use("/api/pets", petRoutes)
 
 sequelize
 .sync()
