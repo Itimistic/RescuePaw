@@ -1,6 +1,6 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom"
 import DonationPage from "./pages/DonationPage"
-import AdoptPage from "./pages/AdoptPage"
+import AdoptPage from "./pages/PetListSection"
 import AdoptBioPage from "./pages/AdoptBioPage"
 import AdoptForm from "./pages/AdoptForm"
 // import Dashboard from "./pages/Dashboard"
