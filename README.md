@@ -7,3 +7,6 @@ naja
 
 hai error dai yang
  heyyy i'm too tired
+
+
+sed yangggg
