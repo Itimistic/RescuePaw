@@ -14,3 +14,21 @@ The React Compiler is not enabled on this template because of its impact on dev 
 ## Expanding the ESLint configuration
 
 If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+
+
+// frontend (React)
+const handleDonate = async () => {
+  const res = await fetch("/api/donation/create-checkout-session", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      donation_type: "one-time",
+      amount: 1000,
+      donor_name: "Kate",
+      email: "kate@example.com"
+    }),
+  });
+
+  const data = await res.json();
+  window.location.href = data.url; // พาไปหน้า Stripe Checkout
+};
