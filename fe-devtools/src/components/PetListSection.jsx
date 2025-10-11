@@ -103,7 +103,7 @@ const PetListSection = () => {
                 onChange={(e) => setFilterSpecies(e.target.value)}
                 className="w-full px-4 py-2 rounded-lg border-2 border-gray-300 focus:border-green-500 focus:outline-none"
               >
-                <option value="">All</option>
+                <option value="All">All</option>
                 <option value="dog">Dog</option>
                 <option value="cat">Cat</option>
               </select>
@@ -117,7 +117,7 @@ const PetListSection = () => {
                 onChange={(e) => setFilterGender(e.target.value)}
                 className="w-full px-4 py-2 rounded-lg border-2 border-gray-300 focus:border-green-500 focus:outline-none"
               >
-                <option value="">All</option>
+                <option value="All">All</option>
                 <option value="male">Male</option>
                 <option value="female">Female</option>
               </select>
@@ -131,7 +131,7 @@ const PetListSection = () => {
                 onChange={(e) => setFilterSize(e.target.value)}
                 className="w-full px-4 py-2 rounded-lg border-2 border-gray-300 focus:border-green-500 focus:outline-none"
               >
-                <option value="">All</option>
+                <option value="All">All</option>
                 <option value="small">Small</option>
                 <option value="medium">Medium</option>
                 <option value="large">Large</option>
@@ -146,7 +146,7 @@ const PetListSection = () => {
                 onChange={(e) => setFilterStatus(e.target.value)}
                 className="w-full px-4 py-2 rounded-lg border-2 border-gray-300 focus:border-green-500 focus:outline-none"
               >
-                <option value="">All</option>
+                <option value="All">All</option>
                 <option value="available">Available</option>
                 <option value="adopted">Adopted</option>
               </select>
@@ -172,7 +172,7 @@ const PetListSection = () => {
               {/* Pet Image */}
               <div className="relative h-64 overflow-hidden">
                 <img
-                  src={pet.image || "/placeholder.jpg"}
+                  src={pet.image}
                   alt={pet.name}
                   className="w-full h-full object-cover"
                 />
