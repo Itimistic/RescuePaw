@@ -6,8 +6,10 @@ const app = express()
 const sequelize = require("./config/dbconn")
 const userRoutes = require("./routes/userRoutes")
 const petRoutes = require("./routes/petRoutes")
+const authRoutes = require("./routes/authRoutes");
+const { verifyToken, verifyAdmin } = require("./middleware/authMiddleware");
 
-// app.use(cors()); 
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
@@ -18,12 +20,19 @@ app.use(cors({
     credentials: true
 }));  
 
-// Routes
+
 app.use("/api/users", userRoutes)
 app.use("/api/pets", petRoutes)
+app.use("/api/auth", authRoutes);
+
+app.get("/api/admin", verifyToken, verifyAdmin, (req, res) => {
+  res.json({ message: "Welcome Admin!" });
+});
+
+
 
 sequelize
-.sync()
+.sync({ alter: true })
 .then(() => {
     console.log("Database synced");
 })
@@ -35,3 +44,4 @@ app.get("/", (req, res) => {
 })
 
 app.listen(process.env.PORT, () => console.log(`Server is running on http://localhost:${process.env.PORT}`))
+
