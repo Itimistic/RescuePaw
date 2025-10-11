@@ -161,54 +161,52 @@ const PetListSection = () => {
           </p>
         </div>
 
-        {/* Pet Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-          {filteredPets.map((pet) => (
-            <div
-              key={pet.id}
-              className="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transform hover:-translate-y-2 transition cursor-pointer"
-              onClick={() => setSelectedPet(pet)}
-            >
-              {/* Pet Image */}
-              <div className="relative h-64 overflow-hidden">
-                <img
-                  src={pet.image || "/placeholder.jpg"}
-                  alt={pet.name}
-                  className="w-full h-full object-cover"
-                />
-                <div className="absolute top-3 right-3 bg-white rounded-full p-2 shadow-lg hover:bg-green-50 transition">
-                  <Heart className="w-5 h-5 text-green-500" />
-                </div>
-                <div className="absolute top-3 left-3 bg-green-500 text-white px-3 py-1 rounded-full text-sm font-semibold">
-                  {pet.species}
-                </div>
-              </div>
+        {/* Card Pet */}
+        <div
+          key={pet.id}
+          className="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transform hover:-translate-y-2 transition cursor-pointer"
+        >
+          {/* Pet Image */}
+          <div className="relative h-64 overflow-hidden">
+            <img
+              src={pet.image || "/placeholder.jpg"}
+              alt={pet.name}
+              className="w-full h-full object-cover"
+            />
+            <div className="absolute top-3 right-3 bg-white rounded-full p-2 shadow-lg hover:bg-green-50 transition">
+              <Heart className="w-5 h-5 text-green-500" />
+            </div>
+            <div className="absolute top-3 left-3 bg-green-500 text-white px-3 py-1 rounded-full text-sm font-semibold">
+              {pet.species}
+            </div>
+          </div>
 
-              {/* Pet Info */}
-              <div className="p-5">
-                <h3 className="text-xl font-bold text-gray-800 mb-2">{pet.name}</h3>
-                <p className="text-gray-600 text-sm mb-3">{pet.breed}</p>
+          {/* Pet Info */}
+          <div className="p-5">
+            <h3 className="text-xl font-bold text-gray-800 mb-2">{pet.name}</h3>
+            <p className="text-gray-600 text-sm mb-3">{pet.breed}</p>
 
-                <div className="flex items-center gap-4 text-sm text-gray-600 mb-3">
-                  <div className="flex items-center gap-1">
-                    <Calendar className="w-4 h-4" />
-                    <span>{pet.age} years</span>
-                  </div>
-                </div>
-
-                <div className="flex items-center gap-4 text-sm text-gray-600 mb-3">
-                  <div className="flex items-center gap-1">
-                    <House className="w-4 h-4" />
-                    <span>{pet.status}</span>
-                  </div>
-                </div>
-
-                <button className="w-full bg-green-500 text-white py-2 rounded-lg font-semibold hover:bg-green-600 transition">
-                  Learn more
-                </button>
+            <div className="flex items-center gap-4 text-sm text-gray-600 mb-3">
+              <div className="flex items-center gap-1">
+                <Calendar className="w-4 h-4" />
+                <span>{pet.age} years</span>
               </div>
             </div>
-          ))}
+
+            <div className="flex items-center gap-4 text-sm text-gray-600 mb-3">
+              <div className="flex items-center gap-1">
+                <House className="w-4 h-4" />
+                <span>{pet.status}</span>
+              </div>
+            </div>
+
+            {/* Learn More Button as Link */}
+            <Link to={`/adopt/${pet.id}`}>
+              <button className="w-full bg-green-500 text-white py-2 rounded-lg font-semibold hover:bg-green-600 transition">
+                Learn more
+              </button>
+            </Link>
+          </div>
         </div>
 
         {/* No Results */}

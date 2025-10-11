@@ -2,16 +2,16 @@ import React, { useState } from "react";
 
 const AdoptForm = ({ petName }) => {
   const [formData, setFormData] = useState({
-    fullName: "",
-    email: "",
-    phone: "",
     address: "",
     city: "",
+    email: "",
+    experiencewithpets: "",
+    agreeterms: false,
+    fullName: "",
+    phone: "",
+    reason: "",
     state: "",
     zip: "",
-    reason: "",
-    experienceWithPets: "",
-    agreeTerms: false,
   });
 
   const [submitted, setSubmitted] = useState(false);
@@ -24,16 +24,32 @@ const AdoptForm = ({ petName }) => {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!formData.agreeTerms) {
+    if (!formData.agreeterms) {
       alert("You must agree to the terms before submitting!");
       return;
     }
 
     console.log("Form submitted:", formData);
     setSubmitted(true);
+    try {
+      const res = await fetch(`${import.meta.env.VITE_API_SERVER_BASE_URL}/api/adopt-forms`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+
+      if (!res.ok) throw new Error("Failed to create checkout session");
+
+      const data = await res.json();
+      console.log("data: ", data)
+
+    } catch (error) {
+      console.log("Error creating form session:", error);
+      alert("Oops! Something went wrong. Please try again.");
+    }
   };
 
   if (submitted) {
@@ -165,9 +181,9 @@ const AdoptForm = ({ petName }) => {
         <div>
           <label className="block text-gray-700 font-medium mb-1">Do you have experience with pets? *</label>
           <textarea
-            name="experienceWithPets"
+            name="experiencewithpets"
             required
-            value={formData.experienceWithPets}
+            value={formData.experiencewithpets}
             onChange={handleChange}
             rows="3"
             className="w-full border border-gray-300 rounded-xl px-4 py-2 focus:outline-none focus:ring-2 focus:ring-amber-500"
@@ -178,8 +194,8 @@ const AdoptForm = ({ petName }) => {
         <div className="flex items-center">
           <input
             type="checkbox"
-            name="agreeTerms"
-            checked={formData.agreeTerms}
+            name="agreeterms"
+            checked={formData.agreeterms}
             onChange={handleChange}
             className="mr-2 accent-amber-500"
             required
