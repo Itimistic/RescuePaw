@@ -1,0 +1,105 @@
+.report-table-container {
+  max-width: 1000px;
+  margin: 40px auto;
+  background-color: #fffafc;
+  border-radius: 20px;
+  padding: 30px;
+  box-shadow: 0 4px 12px rgba(255, 182, 193, 0.2);
+  font-family: "Poppins", "Prompt", sans-serif;
+}
+
+.report-table-container h2 {
+  text-align: center;
+  font-size: 1.8rem;
+  color: #ff7ca8;
+  margin-bottom: 25px;
+  letter-spacing: 1px;
+}
+
+.report-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  background-color: #ffffff;
+  border-radius: 15px;
+  overflow: hidden;
+}
+
+.report-table thead {
+  background-color: #ffb6c1;
+  color: white;
+  font-weight: 600;
+}
+
+.report-table th,
+.report-table td {
+  text-align: center;
+  padding: 14px 10px;
+}
+
+.report-table tbody tr:nth-child(even) {
+  background-color: #fff5f8;
+}
+
+.report-table tbody tr:hover {
+  background-color: #ffe4ec;
+  transform: scale(1.01);
+  transition: all 0.2s ease;
+}
+
+.report-table img {
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(255, 105, 180, 0.3);
+}
+
+.report-table th:first-child {
+  border-top-left-radius: 15px;
+}
+
+.report-table th:last-child {
+  border-top-right-radius: 15px;
+}
+
+.report-table td {
+  color: #555;
+  font-size: 0.95rem;
+  
+}
+
+.delete-btn {
+  background-color: #ff9eb3;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.delete-btn:hover {
+  background-color: #ff6f91;
+  transform: scale(1.05);
+}
+
+p {
+  text-align: center;
+  font-size: 1.1rem;
+  color: #777;
+}
+
+/* สำหรับหน้าจอมือถือ */
+@media (max-width: 768px) {
+  .report-table-container {
+    padding: 15px;
+  }
+
+  .report-table th,
+  .report-table td {
+    padding: 10px 5px;
+    font-size: 0.9rem;
+  }
+
+  .report-table-container h2 {
+    font-size: 1.5rem;
+  }
+}

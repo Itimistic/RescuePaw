@@ -13,7 +13,7 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use(cors({
     origin: process.env.API_CLIENT_BASE_URL,
-    methods: '*',
+    methods: ["GET", "POST", "PUT", "DELETE"],
     allowedHeaders: ['Content-Type', 'Authorization'],
     credentials: true
 }));  

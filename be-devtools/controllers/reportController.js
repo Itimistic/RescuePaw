@@ -1,6 +1,6 @@
 // import Report from "../models/report.js";
 
-const Report = require("../models/report")
+const Report = require("../models/reports")
 
 exports.createReport = async (req, res) => {
   try {
@@ -22,15 +22,34 @@ exports.createReport = async (req, res) => {
   }
 };
 
-// export const getAllReports = async (req, res) => {
-//   try {
-//     const reports = await Report.findAll();
-//     res.json(reports);
-//   } catch (err) {
-//     console.error(err);
-//     res.status(500).json({ message: "ไม่สามารถดึงข้อมูลได้" });
-//   }
-// };
+exports.getAllReports = async (req, res) => {
+  try {
+    const reports = await Report.findAll();
+    res.json(reports);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: "ไม่สามารถดึงข้อมูลได้" });
+  }
+};
+
+exports.deleteReport = async (req, res) => {
+  try {
+    const { id } = req.params;
+    console.log("Delete id:", id);
+    const report = await Report.findByPk(id);
+    console.log("Found report:", report); 
+
+    if (!report) {
+      return res.status(404).json({ message: "ไม่พบข้อมูล" });
+    }
+
+    await report.destroy();
+    res.json({ message: "ลบข้อมูลสำเร็จ" });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: "เกิดข้อผิดพลาดในการลบข้อมูล" });
+  }
+};
 
 // exports.createReport = async (req, res) => {
 //   try {

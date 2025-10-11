@@ -45,7 +45,7 @@ function ReportFormPage() {
             date: formData.date,
             time: formData.time,
             details: formData.details,
-            image: formData.image ? formData.image.name : null, // Send only the image name
+            image: formData.image ? formData.image.name : null, 
         };
 
         try {
