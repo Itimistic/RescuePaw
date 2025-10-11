@@ -21,7 +21,7 @@ function ReportFormPage() {
     });
   };
 
-   const handleImageChange = (e) => {
+  const handleImageChange = (e) => {
     const file = e.target.files[0];
     if (file) {
       setFormData({ ...formData, image: file });
@@ -30,50 +30,45 @@ function ReportFormPage() {
   };
 
 
-    useEffect(() => {
-        const form = new FormData();
-            for (const key in formData) {
-            form.append(key, formData[key]);
-    }});
+  useEffect(() => {
+    const form = new FormData();
+    for (const key in formData) {
+      form.append(key, formData[key]);
+    }
+  });
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-    
-        const payload = {
-            event: formData.event,
-            location: formData.location,
-            date: formData.date,
-            time: formData.time,
-            details: formData.details,
-            image: formData.image ? formData.image.name : null, 
-        };
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
-        try {
-            const response = await fetch(`${import.meta.env.VITE_API_SERVER_BASE_URL}/api/report`, {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify(payload),
-            });
+    const form = new FormData();
+    for (const key in formData) {
+      form.append(key, formData[key]);
+    }
 
-            if (!response.ok) {
-                throw new Error("Network response was not ok");
-            }
-            const data = await response.json();
-            console.log("Response:", data);
-            alert("ส่งรายงานสำเร็จ!");
-        } catch (err) {
-            console.log("Error:", err);
-            alert("เกิดข้อผิดพลาดในการส่งข้อมูล");
-        }
-    };
+    try {
+      const response = await fetch(`${import.meta.env.VITE_API_SERVER_BASE_URL}/api/report`, {
+        method: "POST",
+        body: form, 
+      });
+
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+
+      const data = await response.json();
+      console.log("Response:", data);
+      alert("ส่งรายงานสำเร็จ!");
+    } catch (err) {
+      console.log("Error:", err);
+      alert("เกิดข้อผิดพลาดในการส่งข้อมูล");
+    }
+  };
 
   return (
     <div className="form-container">
-      <h2>แจ้งเหตุด่วน</h2>
+      <h2>Emergency Report</h2>
       <form onSubmit={handleSubmit} className="report-form">
-        <label>เหตุการณ์ที่เกิดขึ้น:</label>
+        <label>What's happened?:</label>
         <input
           type="text"
           name="event"
@@ -82,7 +77,7 @@ function ReportFormPage() {
           required
         />
 
-        <label>สถานที่:</label>
+        <label>Location:</label>
         <input
           type="text"
           name="location"
@@ -91,7 +86,7 @@ function ReportFormPage() {
           required
         />
 
-        <label>วันที่:</label>
+        <label>Date:</label>
         <input
           type="date"
           name="date"
@@ -100,7 +95,7 @@ function ReportFormPage() {
           required
         />
 
-        <label>เวลา(โดยประมาณ):</label>
+        <label>Approximate Time:</label>
         <input
           type="time"
           name="time"
@@ -109,14 +104,14 @@ function ReportFormPage() {
           required
         />
 
-        <label>รายละเอียดเพิ่มเติม:</label>
+        <label>Additional Details:</label>
         <textarea
           name="details"
           value={formData.details}
           onChange={handleChange}
         />
 
-        <label>แนบรูปภาพ:</label>
+        <label>Attach Image:</label>
         <input type="file" accept="image/*" onChange={handleImageChange} />
 
         {preview && (
@@ -125,9 +120,12 @@ function ReportFormPage() {
           </div>
         )}
 
-        <button type="submit">ส่งรายงาน</button>
+        <button type="submit">Submit Report</button>
 
-        
+        <br />
+        <h2>Thank you for your report</h2>
+
+
 
       </form>
     </div>
