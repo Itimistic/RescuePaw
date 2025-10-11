@@ -62,18 +62,18 @@ function ReportPage() {
     <div className="report-table-container">
       <h2>ALL REPORTS</h2>
       {loading ? (
-        <p>กำลังโหลดข้อมูล...</p>
+        <p>loading...</p>
       ) : (
         <table className="report-table">
           <thead>
             <tr>
-              <th>รูปภาพ</th>
-              <th>เหตุการณ์</th>
-              <th>สถานที่</th>  
-              <th>วันที่</th>
-              <th>เวลา</th>
-              <th>รายละเอียด</th>
-              <th>Action</th>
+              <th>IMAGE</th>
+              <th>SITUATION</th>
+              <th>LOCATION</th>
+              <th>DATE</th>
+              <th>TIME</th>
+              <th>DETAILS</th>
+              <th>ACTION</th>
             </tr>
           </thead>
           <tbody>
@@ -91,7 +91,15 @@ function ReportPage() {
                       }}
                     />
                   ) : (
-                    "ไม่มีรูป"
+                    <img
+                      src="https://static.vecteezy.com/system/resources/thumbnails/022/059/000/small_2x/no-image-available-icon-vector.jpg"
+                      alt="No image available"
+                      style={{
+                        width: "80px",
+                        height: "80px",
+                        objectFit: "cover",
+                      }}
+                    />
                   )}
                 </td>
                 <td>{report.event}</td>

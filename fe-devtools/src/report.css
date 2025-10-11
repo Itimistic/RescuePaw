@@ -1,19 +1,21 @@
 .report-table-container {
-  max-width: 1000px;
-  margin: 40px auto;
+  width: 95%;
+  max-width: 1200px;
+  margin: 30px auto;
   background-color: #fffafc;
   border-radius: 20px;
-  padding: 30px;
-  box-shadow: 0 4px 12px rgba(255, 182, 193, 0.2);
+  padding: 35px;
+  box-shadow: 0 6px 25px rgba(255, 182, 193, 0.3);
   font-family: "Poppins", "Prompt", sans-serif;
 }
 
 .report-table-container h2 {
   text-align: center;
-  font-size: 1.8rem;
+  font-size: 2.2rem;
   color: #ff7ca8;
-  margin-bottom: 25px;
-  letter-spacing: 1px;
+  margin-bottom: 30px;
+  letter-spacing: 1.5px;
+  font-weight: 700;
 }
 
 .report-table {
@@ -23,18 +25,26 @@
   background-color: #ffffff;
   border-radius: 15px;
   overflow: hidden;
+  box-shadow: 0 4px 15px rgba(255, 182, 193, 0.2);
 }
 
 .report-table thead {
-  background-color: #ffb6c1;
+  background: linear-gradient(135deg, #ffb6c1, #ff8da1);
   color: white;
   font-weight: 600;
+  font-size: 1.1rem;
 }
 
 .report-table th,
 .report-table td {
   text-align: center;
-  padding: 14px 10px;
+  padding: 18px 15px;
+  border-bottom: 1px solid #ffe4ec;
+}
+
+.report-table th {
+  font-size: 1.1rem;
+  letter-spacing: 0.5px;
 }
 
 .report-table tbody tr:nth-child(even) {
@@ -43,13 +53,19 @@
 
 .report-table tbody tr:hover {
   background-color: #ffe4ec;
-  transform: scale(1.01);
-  transition: all 0.2s ease;
+  transform: scale(1.02);
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(255, 182, 193, 0.3);
 }
 
 .report-table img {
-  border-radius: 10px;
-  box-shadow: 0 2px 5px rgba(255, 105, 180, 0.3);
+  border-radius: 12px;
+  box-shadow: 0 3px 8px rgba(255, 105, 180, 0.4);
+  transition: transform 0.3s ease;
+}
+
+.report-table img:hover {
+  transform: scale(1.1);
 }
 
 .report-table th:first-child {
@@ -62,44 +78,103 @@
 
 .report-table td {
   color: #555;
-  font-size: 0.95rem;
-  
+  font-size: 1rem;
+  font-weight: 500;
 }
 
 .delete-btn {
-  background-color: #ff9eb3;
+  background: linear-gradient(135deg, #ff9eb3, #ff7ca8);
   color: white;
   border: none;
-  padding: 6px 12px;
-  border-radius: 10px;
+  padding: 10px 20px;
+  border-radius: 12px;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: all 0.3s ease;
+  font-weight: 600;
+  font-size: 0.95rem;
+  box-shadow: 0 3px 10px rgba(255, 158, 179, 0.4);
 }
 
 .delete-btn:hover {
-  background-color: #ff6f91;
-  transform: scale(1.05);
+  background: linear-gradient(135deg, #ff6f91, #ff5a7e);
+  transform: scale(1.08);
+  box-shadow: 0 5px 15px rgba(255, 111, 145, 0.5);
 }
 
 p {
   text-align: center;
-  font-size: 1.1rem;
+  font-size: 1.2rem;
   color: #777;
+  margin: 20px 0;
 }
 
 /* สำหรับหน้าจอมือถือ */
 @media (max-width: 768px) {
   .report-table-container {
-    padding: 15px;
+    width: 98%;
+    padding: 20px 15px;
+    margin: 20px auto;
   }
 
   .report-table th,
   .report-table td {
-    padding: 10px 5px;
+    padding: 12px 8px;
     font-size: 0.9rem;
   }
 
   .report-table-container h2 {
-    font-size: 1.5rem;
+    font-size: 1.8rem;
+    margin-bottom: 20px;
   }
+
+  .report-table thead {
+    font-size: 1rem;
+  }
+
+  .delete-btn {
+    padding: 8px 16px;
+    font-size: 0.85rem;
+  }
+}
+
+/* สำหรับหน้าจอขนาดใหญ่ */
+@media (min-width: 1200px) {
+  .report-table-container {
+    width: 90%;
+    max-width: 1400px;
+    padding: 40px;
+  }
+
+  .report-table th,
+  .report-table td {
+    padding: 20px;
+    font-size: 1.05rem;
+  }
+}
+
+/* Scroll สำหรับตารางบนมือถือ */
+@media (max-width: 600px) {
+  .report-table-container {
+    overflow-x: auto;
+  }
+  
+  .report-table {
+    min-width: 600px;
+  }
+}
+
+/* Loading state */
+.loading {
+  text-align: center;
+  font-size: 1.3rem;
+  color: #ff7ca8;
+  margin: 30px 0;
+}
+
+/* Empty state */
+.empty-state {
+  text-align: center;
+  padding: 40px;
+  color: #888;
+  font-size: 1.1rem;
 }
