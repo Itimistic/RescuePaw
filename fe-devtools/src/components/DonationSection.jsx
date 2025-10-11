@@ -18,12 +18,12 @@ const DonationSection = () => {
 
   const calculateImpact = (amount) => {
     if (!amount || amount <= 0) return "";
+    if (amount < 500) return "Every baht helps a stray animal!";
+    if (amount < 1000) return `Provides pet food for about ${Math.floor(amount / 500)} week(s)`;
+    if (amount < 2000) return `Covers vaccines or deworming for ${Math.floor(amount / 1000)} animal(s)`;
+    if (amount < 5000) return `Provides basic medical care for ${Math.floor(amount / 2000)} animal(s)`;
+    return `Supports spaying/neutering for about ${Math.floor(amount / 5000)} animal(s)`;
 
-    if (amount < 500) return "ทุกบาทช่วยสัตว์จรจัดได้!";
-    if (amount < 1000) return `อาหารสัตว์ประมาณ ${Math.floor(amount / 500)} สัปดาห์`;
-    if (amount < 2000) return `สามารถให้วัคซีน/ยาถ่ายพยาธิได้ ${Math.floor(amount / 1000)} ตัว`;
-    if (amount < 5000) return `การรักษาพยาบาลเบื้องต้นสำหรับ ${Math.floor(amount / 2000)} ตัว`;
-    return `สามารถทำหมันสัตว์ได้ประมาณ ${Math.floor(amount / 5000)} ตัว`;
   };
 
   useEffect(() => {
@@ -38,10 +38,10 @@ const DonationSection = () => {
 
     if (!stripe || !elements) return;
 
-    if (!amount || amount <= 0) return alert("กรุณาใส่จำนวนเงินบริจาค");
-    if (!donationType) return alert("กรุณาเลือกประเภทการบริจาค");
-    if (!donorName) return alert("กรุณากรอกชื่อ");
-    if (!donorEmail) return alert("กรุณากรอก email");
+    if (!amount || amount <= 0) return alert("Please enter a donation amount");
+    if (!donationType) return alert("Please select a donation type");
+    if (!donorName) return alert("Please enter your name");
+    if (!donorEmail) return alert("Please enter your email");
 
     const payload = {
       donation_type: donationType,
@@ -66,7 +66,7 @@ const DonationSection = () => {
 
     } catch (error) {
       console.log("Error creating donation session:", error);
-      alert("เกิดข้อผิดพลาด กรุณาลองใหม่อีกครั้ง");
+      alert("Oops! Something went wrong. Please try again.");
     }
   };
 
@@ -74,13 +74,13 @@ const DonationSection = () => {
   return (
     <>
       <div>
-        <label className="block text-lg font-semibold text-gray-800 mb-4">ข้อมูลผู้บริจาค</label>
+        <label className="block text-xl font-semibold text-gray-800 mb-4">Donor Information</label>
         <div className="flex flex-col gap-4">
           <div className="relative">
             <User className="absolute pointer-events-none left-4 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
             <input
               type="text"
-              placeholder="Full Name"
+              placeholder="Full name"
               value={donorName}
               onChange={(e) => setDonorName(e.target.value)}
               className="w-full pl-12 pr-4 py-4 rounded-xl border-2 border-gray-300 focus:border-amber-400 focus:outline-none text-lg"
@@ -100,16 +100,16 @@ const DonationSection = () => {
       </div>
       
       <div>
-        <label className="block text-lg font-semibold text-gray-800 mb-4">ประเภทการบริจาค</label>
+        <label className="block text-lg font-semibold text-gray-800 mb-4">Type of Donation</label>
         <div>
           <button
             onClick={() => setDonationType("one-time")}
-            className={`p-4 w-full font-semibold rounded-xl transition ${donationType === "one-time"
+            className={`p-4 w-full font-semibold text-lg rounded-xl transition ${donationType === "one-time"
                 ? " bg-amber-100 text-amber-600"
                 : "bg-stone-300"
               }`}
           >
-            บริจาคครั้งเดียว
+            One-time Donation
           </button>
           {/* <button
             onClick={() => setDonationType("monthly")}
@@ -124,7 +124,7 @@ const DonationSection = () => {
       </div>
 
       <div>
-        <label className="block text-lg font-semibold text-gray-800 mb-4">เลือกจำนวนเงิน (บาท)</label>
+        <label className="block text-lg font-semibold text-gray-800 mb-4">Select Amount (Baht)</label>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
           {donationPresets.map((amount) => (
             <button
@@ -145,7 +145,7 @@ const DonationSection = () => {
       </div>
 
       <div>
-        <label className="block text-lg font-semibold text-gray-800 mb-4">หรือระบุจำนวนเงินเอง</label>
+        <label className="block text-lg font-semibold text-gray-800 mb-4">or enter your own amount</label>
         <div className="relative">
           <Banknote className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
           <input
@@ -155,8 +155,8 @@ const DonationSection = () => {
               setCustomAmount(e.target.value);
               setDonationAmount("");
             }}
-            placeholder="ระบุจำนวนเงิน"
-            className="w-full pl-12 pr-4 py-4 rounded-xl border-2 border-gray-300 focus:border-amber-400 focus:outline-none text-lg"
+            placeholder="Enter Amount (Baht)"
+            className="w-full pl-12 pr-4 py-4 rounded-lg border-2 border-gray-300 focus:border-amber-400 focus:outline-none text-lg"
             min="0"
           />
         </div>
@@ -166,7 +166,7 @@ const DonationSection = () => {
         <div className="bg-amber-50 rounded-xl p-6 border-2 border-amber-200">
           <h3 className="font-semibold text-gray-800 mb-3 flex items-center">
             <Heart className="w-5 h-5 mr-2 text-amber-400 fill-amber-400" />
-            ผลกระทบจากการบริจาคของคุณ:
+            Your Donation’s Impact:
           </h3>
           <p className="text-gray-700">{impactMessage}</p>
         </div>
@@ -176,11 +176,11 @@ const DonationSection = () => {
         onClick={handleDonation}
         className="w-full bg-gradient-to-r from-amber-400 to-orange-400 text-white py-5 rounded-xl font-bold text-lg hover:shadow-2xl transform hover:-translate-y-1 transition"
       >
-        บริจาคเลย
+        Donate Now
       </button>
 
-      <p className="text-center text-sm text-gray-500">
-        การบริจาคปลอดภัยและสามารถลดหย่อนภาษีได้
+      <p className="text-center text-medium text-gray-500">
+        “Donations are secure and tax-deductible.
       </p>
     </>
   );

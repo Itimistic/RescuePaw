@@ -3,6 +3,8 @@ import DonationPage from "./pages/DonationPage"
 import DonateSuccess from "./pages/DonateSuccess"
 import DonateCerti from "./pages/DonateCerti"
 import DonateCancel from "./pages/DonateCancel"
+import DonateDashboard from "./pages/admin/DonateDashboard"
+import DonateDetail from "./pages/admin/DonateDetail"
 import Navbar from "./components/Navbar"
 import { Elements } from '@stripe/react-stripe-js';
 import { loadStripe } from '@stripe/stripe-js';
@@ -25,6 +27,8 @@ function App() {
             <Route path="/donate/success" element={<DonateSuccess />} />
             <Route path="/donate/certificate/:id" element={<DonateCerti />} />
             <Route path="/donate/cancel" element={<DonateCancel />} />
+            <Route path="/admin/donate" element={<DonateDashboard />} />
+            <Route path="/admin/donate/:id" element={<DonateDetail />} />
         </Routes>
     </BrowserRouter>
   )

@@ -27,6 +27,7 @@ exports.createDonation = async (req, res) => {
                 },
             ],
             mode: donation_type === "monthly" ? "subscription" : "payment",
+            // success_url: `${process.env.API_CLIENT_BASE_URL}/donate/success?order_id=${orderId}`,
             success_url: `${process.env.API_CLIENT_BASE_URL}/donate/success?order_id=${orderId}`,
             cancel_url: `${process.env.API_CLIENT_BASE_URL}/donate/cancel?order_id=${orderId}`,
             customer_email: email, // Stripe จะใช้แสดงในหน้า checkout ด้วย
@@ -34,7 +35,7 @@ exports.createDonation = async (req, res) => {
                 order_id: orderId, // เก็บไว้ให้ webhook ใช้อ้างอิงได้
             },
         });
-        // console.log("session", session);
+        console.log("session", session);
         // 🧠 บันทึกข้อมูล donation ไว้ในฐานข้อมูล
         const donation = await Donation.create({
             donation_type,
@@ -59,9 +60,9 @@ exports.createDonation = async (req, res) => {
     }
 };
 
-exports.getDonation = async (req, res) => {
+exports.getDonationByOrderId = async (req, res) => {
     const orderId = req.params.id;
-    // console.log("orderId: ", orderId)
+    console.log("orderId: ", orderId)
     try {
         const result = await Donation.findOne({
             where: {
@@ -73,10 +74,32 @@ exports.getDonation = async (req, res) => {
                 errorMessage: "Order not found",
             };
         }
-        console.log("result: ", result.dataValues)
-        res.json(result.dataValues);
+
+        const donation = result.dataValues;
+        console.log("result: ", donation)
+        // if (donation.status !== "complete") {
+        //     const session = await stripe.checkout.sessions.retrieve(donation.session_id);
+        //     console.log("session: ", session.url)
+        //     return res.json({
+        //         ...donation,
+        //         checkout_url: session.url,
+        //     });
+        // }
+
+        // console.log("result: ", donation)
+        res.json(donation);
     } catch (error) {
             console.log("error", error);
             res.status(404).json({ error: error.errorMessage || "System error" });
     }
+}
+
+exports.getDonation = async (req, res) => {
+  try {
+    const donations = await Donation.findAll({ order: [["createdAt", "DESC"]] });
+    res.json(donations);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "Cannot fetch donations" });
+  }
 }

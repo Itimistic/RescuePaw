@@ -48,7 +48,5 @@ exports.handleStripeWebhook = async (req, res) => {
         default:
             console.log(`Unhandled event type ${event.type}`);
     }
-
-
     res.send();
 }

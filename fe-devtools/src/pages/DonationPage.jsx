@@ -31,16 +31,16 @@ const DonationPage = () => {
           <span className="text-amber-500">change the lives</span> of dogs and cats{" "}
           <span className="text-amber-500">waiting for hope.</span>
         </h1>
-        <p className="mt-1 font-medium text-gray-600">
+        <p className="mt-1 font-semibold text-gray-500">
           Your support helps us provide food, shelter, and love for stray dogs and cats.
         </p>
       </div>
-      <section id="donation" className="py-20 lg:px-32 bg-gradient-to-b from-amber-50 to-amber-50 w-full">
-        <div className="max-w-7xl mx-auto">
+      <section id="donation" className="py-20 flex sm:flex-col lg:px-32 bg-gradient-to-b from-white to-amber-100 w-full">
+        <div className="max-w-fit mx-auto">
           <div className="text-center mb-12">
-            <h2 className="text-4xl font-bold text-gray-800 mb-4">บริจาคเพื่อช่วยเหลือสัตว์จรจัด</h2>
-            <p className="text-xl text-gray-600">
-              การบริจาคของคุณช่วยให้หมาและแมวจรจัดมีอาหาร, ยารักษา และที่อยู่อาศัยที่ปลอดภัย
+            <h2 className="text-4xl font-bold text-gray-800 mb-4">Donate to Help Stray Animals</h2>
+            <p className="text-2xl font-semibold text-gray-500">
+              Your donation provides food, medicine, and safe shelter for stray dogs and cats.
             </p>
           </div>
 
@@ -48,47 +48,49 @@ const DonationPage = () => {
             <div className="rounded-3xl p-12 w-full flex bg-white flex-col gap-8 shadow-2xl">
               <DonationSection />
             </div>
-            <div className="rounded-3xl shadow-2xl p-6 bg-white md:p-8 lg:max-w-1/3 flex flex-col gap-6 max-h-fit">
-                <img src={dog_cat} alt="สัตว์จรจัด" className="rounded-2xl object-cover" />
-                <h3 className="text-2xl font-bold text-gray-800 mb-3">เรื่องราวของสัตว์จรจัด</h3>
 
-                <div className="flex flex-col gap-5">
-                    <div className="border-l-4 border-amber-400 pl-4">
-                    <h4 className="font-semibold text-lg text-gray-800">น้องหมาจรจากชุมชนเมือง</h4>
-                    <p className="text-gray-600 text-sm">
-                        น้องหมาตัวนี้ถูกพบในซอยเล็ก ๆ ของกรุงเทพฯ ทีมงานเราได้นำอาหารและน้ำไปให้ทุกวันจนเริ่มคุ้นเคย
-                        การบริจาคของคุณช่วยให้เราสามารถดูแลและหาบ้านใหม่ให้กับน้องหมาเหล่านี้ได้
-                    </p>
-                    </div>
+            <div className="rounded-3xl shadow-2xl p-6 bg-white md:p-10 lg:max-w-1/3 flex flex-col gap-6 max-h-fit">
+              <img src={dog_cat} alt="Stray Animals" className="rounded-2xl object-cover" />
+              <h3 className="text-2xl font-bold text-gray-800 mb-3">Stories of Stray Animals</h3>
 
-                    <div className="border-l-4 border-amber-400 pl-4">
-                    <h4 className="font-semibold text-lg text-gray-800">น้องแมวที่ถูกทิ้ง</h4>
-                    <p className="text-gray-600 text-sm">
-                        น้องแมวหลายตัวถูกทิ้งตามชุมชน ทีมงานของเรานำอาหาร วัคซีน และที่พักพิงชั่วคราวให้
-                        บริจาคของคุณช่วยสร้างความปลอดภัยและสุขภาพที่ดีให้พวกเขา
-                    </p>
-                    </div>
-                    
-                    <div className="border-l-4 border-amber-400 pl-4">
-                    <h4 className="font-semibold text-lg text-gray-800">การทำหมันสัตว์</h4>
-                    <p className="text-gray-600 text-sm">
-                        การทำหมันสัตว์ช่วยควบคุมจำนวนประชากรสัตว์จรจัด ลดความทุกข์ทรมานของสัตว์ และป้องกันการแพร่โรค
-                        ทุกการบริจาคช่วยให้โครงการนี้ดำเนินต่อไปได้
-                    </p>
-                    </div>
-
-                    <div className="border-l-4 border-amber-400 pl-4">
-                    <h4 className="font-semibold text-lg text-gray-800">ความสำคัญของการบริจาค</h4>
-                    <p className="text-gray-600 text-sm">
-                        เงินบริจาคของคุณถูกใช้ในการซื้ออาหาร ยารักษาโรค วัคซีน และอุปกรณ์ดูแลสัตว์
-                        ทุกบาทมีค่าต่อชีวิตของสัตว์จรจัดและสร้างความหวังให้กับพวกเขา
-                    </p>
-                    </div>
+              <div className="flex flex-col gap-7">
+                <div className="border-l-4 border-amber-400 pl-4">
+                  <h4 className="font-semibold text-lg mb-2 text-gray-800">Stray Dog from the City</h4>
+                  <p className="text-gray-600 text-medium">
+                    This dog was found in a small alley in Bangkok. Our team has been providing food and water daily until it became familiar with us.
+                    Your donation helps us care for and find new homes for stray dogs like this.
+                  </p>
                 </div>
+
+                <div className="border-l-4 border-amber-400 pl-4">
+                  <h4 className="font-semibold text-lg mb-2 text-gray-800">Abandoned Cats</h4>
+                  <p className="text-gray-600 text-medium">
+                    Many cats have been abandoned in communities. Our team provides food, vaccines, and temporary shelter.
+                    Your donation ensures their safety and good health.
+                  </p>
+                </div>
+
+                <div className="border-l-4 border-amber-400 pl-4">
+                  <h4 className="font-semibold text-lg mb-2 text-gray-800">Spaying and Neutering</h4>
+                  <p className="text-gray-600 text-medium">
+                    Spaying and neutering helps control the stray animal population, reduces their suffering, and prevents disease.
+                    Every donation helps this program continue.
+                  </p>
+                </div>
+
+                <div className="border-l-4 border-amber-400 pl-4">
+                  <h4 className="font-semibold text-lg mb-2 text-gray-800">The Importance of Donations</h4>
+                  <p className="text-gray-600 text-medium">
+                    Your donations are used to buy food, medicine, vaccines, and animal care supplies.
+                    Every baht matters to the lives of stray animals and brings them hope.
+                  </p>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </section>
+
     </div>
   )
 }

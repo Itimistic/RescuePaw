@@ -11,6 +11,7 @@ const DonateSuccess = () => {
   const navigate = useNavigate();
 
   const orderId = searchParams.get("order_id");
+  console.log(orderId)
 
   useEffect(() => {
     if (!orderId) {
@@ -28,10 +29,6 @@ const DonateSuccess = () => {
         if (!res.ok) throw new Error("ไม่พบข้อมูลการบริจาค");
 
         const data = await res.json();
-        if (data.status !== "complete") {
-          navigate("/donate/cancel");
-          return;
-        }
 
         setDonation(data);
         setLoading(false);

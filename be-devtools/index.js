@@ -2,7 +2,12 @@ require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
 const app = express()
+// const Storage  = require('@google-cloud/storage');
 const { v4: uuidv4 } = require("uuid");
+
+
+const uploadRoutes = require('./routes/uploadRoutes');
+app.use('/api/upload', uploadRoutes);
 
 const sequelize = require("./config/dbconn")
 const adminRoutes = require("./routes/adminRoutes")

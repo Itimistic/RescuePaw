@@ -88,17 +88,17 @@ const CertificatePage = () => {
 
       {/* ปุ่มดาวน์โหลด / พิมพ์ */}
       <div className="mt-8 flex flex-col gap-4 items-center">
-        <button
+        {/* <button
           onClick={handlePrint}
           className="bg-gradient-to-r from-amber-400 to-orange-400 text-white px-6 py-3 rounded-xl font-semibold flex items-center gap-2 hover:shadow-lg"
         >
           <Download size={20} /> พิมพ์ / บันทึกเป็น PDF
-        </button>
+        </button> */}
         <button
           onClick={() => navigate(-1)}
-          className="flex items-center gap-2 text-amber-500 hover:text-orange-600 font-medium"
+          className="bg-gradient-to-r from-amber-400 to-orange-400 text-white px-6 py-3 rounded-xl font-semibold flex items-center gap-2 hover:shadow-lg"
         >
-          <ArrowLeft size={20} /> กลับ
+          <ArrowLeft size={20} /> Back
         </button>
       </div>
     </div>
