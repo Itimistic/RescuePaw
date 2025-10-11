@@ -6,11 +6,11 @@ pipeline {
         DOCKER_CREDENTIALS = credentials('dockerhub')
         
         // Backend variables
-        BACKEND_IMAGE = 'tuchsanai/rescuepaw-backend:latest'
+        BACKEND_IMAGE = 'znebly/rescuepaw-backend:latest'
         BACKEND_PORT = '3000'
         
         // Frontend variables  
-        FRONTEND_IMAGE = 'tuchsanai/rescuepaw-frontend:latest'
+        FRONTEND_IMAGE = 'znebly/rescuepaw-frontend:latest'
         FRONTEND_PORT = '5173'
     }
     
