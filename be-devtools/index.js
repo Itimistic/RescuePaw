@@ -6,16 +6,18 @@ const app = express()
 const { v4: uuidv4 } = require("uuid");
 
 
-const uploadRoutes = require('./routes/uploadRoutes');
-app.use('/api/upload', uploadRoutes);
-
 const sequelize = require("./config/dbconn")
-const adminRoutes = require("./routes/adminRoutes")
 const donateRoutes = require("./routes/donateRoutes")
 const webhookRoutes = require("./routes/webhookRoutes")
 
 app.use("/webhook", webhookRoutes)
 // app.use(cors()); 
+const userRoutes = require("./routes/userRoutes")
+const petRoutes = require("./routes/petRoutes")
+const authRoutes = require("./routes/authRoutes");
+const { verifyToken, verifyAdmin } = require("./middleware/authMiddleware");
+
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
@@ -29,10 +31,19 @@ app.use(cors({
 // Routes
 // app.use("/api/users", userRoutes)
 app.use("/api/donate", donateRoutes)
-app.use("/api/admin", adminRoutes)
+
+app.use("/api/users", userRoutes)
+app.use("/api/pets", petRoutes)
+app.use("/api/auth", authRoutes);
+
+app.get("/api/admin", verifyToken, verifyAdmin, (req, res) => {
+  res.json({ message: "Welcome Admin!" });
+});
+
+
 
 sequelize
-.sync()
+.sync({ alter: true })
 .then(() => {
     console.log("Database synced");
 })
@@ -44,3 +55,4 @@ app.get("/", (req, res) => {
 })
 
 app.listen(process.env.PORT, () => console.log(`Server is running on http://localhost:${process.env.PORT}`))
+

@@ -18,13 +18,13 @@ const Pet = sequelize.define("Pet", {
         type: DataTypes.ENUM("male", "female"),
     },
     size: {
-        type: DataTypes.ENUM("small", "medium", "big"),
+        type: DataTypes.ENUM("small", "medium", "large"),
     },
     image: {
         type: DataTypes.STRING,
     },
     status: {
-        type: DataTypes.ENUM('available', 'adopted', 'reserved'),
+        type: DataTypes.ENUM('available', 'adopted'),
         defaultValue: 'available'
     },
 })

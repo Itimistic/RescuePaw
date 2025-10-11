@@ -1,4 +1,4 @@
-const User = require("../models/admin")
+const User = require("../models/user")
 
 exports.getUsers = async (req, res) => {
     try {
@@ -11,8 +11,8 @@ exports.getUsers = async (req, res) => {
 
 exports.createUser = async (req, res) => {
     try {
-        const { username, email } = req.body
-        const newUser = await User.create({ username, email })
+        const { username, email, password } = req.body
+        const newUser = await User.create({ username, email, password })
         res.json(newUser)
     } catch (error) {
         res.status(500).json({ error: error.message })
