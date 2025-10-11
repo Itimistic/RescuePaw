@@ -1,8 +1,9 @@
 import React, { useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 
 const AdoptForm = ({ petName }) => {
   const { id } = useParams();
+  const navigate = useNavigate();
   // console.log("id: ", id)
   const [formData, setFormData] = useState({
     address: "",
@@ -65,6 +66,15 @@ const AdoptForm = ({ petName }) => {
         <p className="text-gray-700 text-lg text-center max-w-xl">
           We have received your application. Our team will contact you shortly to complete the adoption process.
         </p>
+        <br></br>
+        <div className="mt-10 text-center">
+        <button
+          onClick={() => navigate("/adopt")}
+          className="text-amber-500 underline font-medium hover:text-amber-600"
+        >
+          Back to Adopt Page
+        </button>
+      </div>
       </div>
     );
   }
