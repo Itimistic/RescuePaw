@@ -25,12 +25,11 @@ app.use("/api/pets", petRoutes)
 app.use("/api/adopt-forms", adoptformRoutes);
 
 sequelize
-.sync()
+.sync({ alter: true })
 .then(() => {
     console.log("Database synced");
 })
 .catch((err) => console.error("Error syncing DB:", err));
-
 
 app.get("/", (req, res) => {
     res.send("Hello World")

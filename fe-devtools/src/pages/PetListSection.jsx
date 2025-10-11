@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Search, Filter, Heart, Calendar, House } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const PetListSection = () => {
   // State สำหรับข้อมูลสัตว์
@@ -24,7 +25,7 @@ const PetListSection = () => {
         });
 
         const data = await res.json();
-        console.log("data:", data);
+        console.log("data1:", data);
         setPets(data.data);
         setFilteredPets(data.data);
       } catch (error) {
@@ -161,7 +162,8 @@ const PetListSection = () => {
           </p>
         </div>
 
-        {/* Card Pet */}
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {filteredPets.map((pet) => (
         <div
           key={pet.id}
           className="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transform hover:-translate-y-2 transition cursor-pointer"
@@ -177,7 +179,7 @@ const PetListSection = () => {
               <Heart className="w-5 h-5 text-green-500" />
             </div>
             <div className="absolute top-3 left-3 bg-green-500 text-white px-3 py-1 rounded-full text-sm font-semibold">
-              {pet.species}
+              {pet.species} {pet.id}
             </div>
           </div>
 
@@ -201,13 +203,16 @@ const PetListSection = () => {
             </div>
 
             {/* Learn More Button as Link */}
-            <Link to={`/adopt/${pet.id}`}>
-              <button className="w-full bg-green-500 text-white py-2 rounded-lg font-semibold hover:bg-green-600 transition">
-                Learn more
-              </button>
+            <Link
+              to={`/adopt/${pet.id}`}
+              className="block w-full bg-green-500 text-white py-2 rounded-lg font-semibold hover:bg-green-600 transition text-center"
+            >
+              Learn more
             </Link>
           </div>
         </div>
+      ))}
+    </div>
 
         {/* No Results */}
         {filteredPets.length === 0 && (

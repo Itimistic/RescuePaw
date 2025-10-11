@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import { Search, Filter, Heart, Calendar, House } from "lucide-react";
+import { Link } from "react-router-dom";
+
 
 const PetListSection = () => {
   // State สำหรับข้อมูลสัตว์
@@ -203,9 +205,9 @@ const PetListSection = () => {
                   </div>
                 </div>
 
-                <button className="w-full bg-green-500 text-white py-2 rounded-lg font-semibold hover:bg-green-600 transition">
+                <Link to={`/adopt/${pet.id}`} className="w-full bg-green-500 text-white py-2 px-5 rounded-lg font-semibold hover:bg-green-600 transition">
                   Learn more
-                </button>
+                </Link>
               </div>
             </div>
           ))}

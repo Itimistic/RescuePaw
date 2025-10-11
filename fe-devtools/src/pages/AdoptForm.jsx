@@ -1,6 +1,9 @@
 import React, { useState } from "react";
+import { useParams } from "react-router-dom";
 
 const AdoptForm = ({ petName }) => {
+  const { id } = useParams();
+  // console.log("id: ", id)
   const [formData, setFormData] = useState({
     address: "",
     city: "",
@@ -12,6 +15,7 @@ const AdoptForm = ({ petName }) => {
     reason: "",
     state: "",
     zip: "",
+    pet_id: id
   });
 
   const [submitted, setSubmitted] = useState(false);

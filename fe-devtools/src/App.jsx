@@ -3,6 +3,8 @@ import DonationPage from "./pages/DonationPage"
 import AdoptBioPage from "./pages/AdoptBioPage"
 import AdoptForm from "./pages/AdoptForm"
 import PetListPage from "./pages/PetListPage"
+import AdminAdoptPage from "./pages/admin/AdminAdoptPage"
+import AdminAdoptDetailPage from "./pages/admin/AdminAdoptDetailPage"
 // import Dashboard from "./pages/Dashboard"
 // import Login from "./pages/Login"
 // import Register from "./pages/Register"
@@ -19,7 +21,9 @@ function App() {
           <Route path="/" element={<DonationPage />} />
           <Route path="/adopt" element={<PetListPage />} />
           <Route path="/adopt/:id" element={<AdoptBioPage />} />
-          <Route path="/adopt/:id/form" element={<AdoptForm />} />
+          <Route path="/adopt/form/:id" element={<AdoptForm />} />
+          <Route path="/admin/adopt" element={<AdminAdoptPage />} />
+          <Route path="/admin/adopt/:id" element={<AdminAdoptDetailPage />} />
         </Routes>
     </BrowserRouter>
   )
