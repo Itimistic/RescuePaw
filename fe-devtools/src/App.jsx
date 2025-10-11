@@ -1,4 +1,14 @@
 import DonationPage from "./pages/DonationPage"
+// import Dashboard from "./pages/Dashboard"
+// import Login from "./pages/Login"
+// import Register from "./pages/Register"
+// import Navbar from "./components/navbar/Navbar"
+// import Home from "./pages/Home"
+// import Profile from "./pages/Profile"
+// import Communities from "./pages/Communities"
+// import { AuthProvider } from "./hooks/userAuth"
+import ReportFormPage from "./pages/ReportFormPage"
+import ReportPage from "./pages/ReportPage"
 import DonateSuccess from "./pages/DonateSuccess"
 import DonateCerti from "./pages/DonateCerti"
 import DonateCancel from "./pages/DonateCancel"
@@ -18,6 +28,7 @@ const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY);
 function App() {
   return (
     <BrowserRouter>
+      
       <Navbar />
       <Routes>
         {/* Public routes */}
@@ -33,6 +44,8 @@ function App() {
         <Route path="/donate/success" element={<DonateSuccess />} />
         <Route path="/donate/certificate/:id" element={<DonateCerti />} />
         <Route path="/donate/cancel" element={<DonateCancel />} />
+        
+        <Route path="/reportform" element={<ReportFormPage />} />
 
         {/* Normal user routes */}
         {/* <Route
@@ -82,6 +95,14 @@ function App() {
           element={
             <ProtectedRoute adminOnly={true}>
               <DonateDetail />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/admin/report" 
+          element={
+            <ProtectedRoute adminOnly={true}>
+              <ReportPage />
             </ProtectedRoute>
           }
         />

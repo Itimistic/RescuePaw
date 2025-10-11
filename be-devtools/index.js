@@ -7,6 +7,8 @@ const { v4: uuidv4 } = require("uuid");
 
 
 const sequelize = require("./config/dbconn")
+const userRoutes = require("./routes/userRoutes")
+const reportRoutes = require("./routes/reportRoutes")
 const donateRoutes = require("./routes/donateRoutes")
 const webhookRoutes = require("./routes/webhookRoutes")
 
@@ -23,7 +25,7 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use(cors({
     origin: process.env.API_CLIENT_BASE_URL,
-    methods: '*',
+    methods: ["GET", "POST", "PUT", "DELETE"],
     allowedHeaders: ['Content-Type', 'Authorization'],
     credentials: true
 }));  
@@ -33,6 +35,7 @@ app.use(cors({
 app.use("/api/donate", donateRoutes)
 
 app.use("/api/users", userRoutes)
+app.use("/api/report", reportRoutes);
 app.use("/api/pets", petRoutes)
 app.use("/api/auth", authRoutes);
 
@@ -53,6 +56,10 @@ sequelize
 app.get("/", (req, res) => {
     res.send("Hello World")
 })
+
+// app.get("/reportform", (req, res) -> {
+//     res.render("report");
+// })
 
 app.listen(process.env.PORT, () => console.log(`Server is running on http://localhost:${process.env.PORT}`))
 

@@ -11,6 +11,9 @@
     "tailwind:init": "tailwindcss init -p"
   },
   "dependencies": {
+    "@google-cloud/storage": "^7.17.2",
+    "@tailwindcss/vite": "^4.1.14",
+    "multer": "^2.0.2",
     "@stripe/react-stripe-js": "^5.2.0",
     "@stripe/stripe-js": "^8.0.0",
     "@tailwindcss/vite": "^4.1.14",
