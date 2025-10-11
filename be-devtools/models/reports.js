@@ -25,10 +25,12 @@ const Report = sequelize.define("Report", {
     details: {
         type: DataTypes.STRING,
         allowNull: true,
+        
     },
     image: {
         type: DataTypes.STRING,
         allowNull: true,
+        
     }
 })
 
