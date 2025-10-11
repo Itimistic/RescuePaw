@@ -1,10 +1,32 @@
 // import Report from "../models/report.js";
 
 const Report = require("../models/reports")
+const bucket = require("../config/gcs"); 
+const { format } = require("util");
 
 exports.createReport = async (req, res) => {
   try {
-    const { event, location, date, time, details, image } = req.body;
+    const { event, location, date, time, details } = req.body;
+    const file = req.file; 
+    console.log("Received file:", file);
+    let imageUrl = null;
+
+    //have image to upload
+    if (file) {
+      const blob = bucket.file(Date.now() + "_" + file.originalname);
+      const blobStream = blob.createWriteStream({
+        resumable: false,
+        contentType: file.mimetype,
+      });
+
+      await new Promise((resolve, reject) => {
+        blobStream.on("error", reject);
+        blobStream.on("finish", resolve);
+        blobStream.end(file.buffer);
+      });
+
+      imageUrl = `https://storage.googleapis.com/${bucket.name}/${blob.name}`;
+    }
 
     const report = await Report.create({
       event,
@@ -12,7 +34,7 @@ exports.createReport = async (req, res) => {
       date,
       time,
       details,
-      image,
+      image: imageUrl,
     });
 
     res.status(201).json({ message: "บันทึกข้อมูลสำเร็จ", data: report });

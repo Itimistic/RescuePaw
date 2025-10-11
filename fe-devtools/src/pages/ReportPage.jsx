@@ -69,7 +69,7 @@ function ReportPage() {
             <tr>
               <th>รูปภาพ</th>
               <th>เหตุการณ์</th>
-              <th>สถานที่</th>
+              <th>สถานที่</th>  
               <th>วันที่</th>
               <th>เวลา</th>
               <th>รายละเอียด</th>
