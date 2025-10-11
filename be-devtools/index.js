@@ -8,6 +8,8 @@ const { v4: uuidv4 } = require("uuid");
 
 const sequelize = require("./config/dbconn")
 const userRoutes = require("./routes/userRoutes")
+const petRoutes = require('./routes/petRoutes');
+const adoptformRoutes = require('./routes/adoptformRoutes');
 const reportRoutes = require("./routes/reportRoutes")
 const donateRoutes = require("./routes/donateRoutes")
 const webhookRoutes = require("./routes/webhookRoutes")
@@ -35,6 +37,8 @@ app.use(cors({
 app.use("/api/donate", donateRoutes)
 
 app.use("/api/users", userRoutes)
+app.use("/api/pets", petRoutes)
+app.use("/api/adopt-forms", adoptformRoutes);
 app.use("/api/report", reportRoutes);
 app.use("/api/pets", petRoutes)
 app.use("/api/auth", authRoutes);
@@ -51,7 +55,6 @@ sequelize
     console.log("Database synced");
 })
 .catch((err) => console.error("Error syncing DB:", err));
-
 
 app.get("/", (req, res) => {
     res.send("Hello World")

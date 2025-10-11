@@ -2,6 +2,7 @@ services:
   postgres:
     image: postgres:latest
     container_name: postgres_container
+    platform: linux/amd64
     environment:
       POSTGRES_USER: ${DB_USER}
       POSTGRES_PASSWORD: ${DB_PASSWORD}
@@ -16,6 +17,7 @@ services:
   pgadmin:
     image: dpage/pgadmin4:latest
     container_name: pgadmin_container
+    platform: linux/amd64
     environment:
       PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL}
       PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD}
