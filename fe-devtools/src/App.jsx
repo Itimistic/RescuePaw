@@ -1,5 +1,8 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom"
 import DonationPage from "./pages/DonationPage"
+import AdoptPage from "./pages/AdoptPage"
+import AdoptBioPage from "./pages/AdoptBioPage"
+import AdoptForm from "./pages/AdoptForm"
 // import Dashboard from "./pages/Dashboard"
 // import Login from "./pages/Login"
 // import Register from "./pages/Register"
@@ -15,6 +18,9 @@ function App() {
     <BrowserRouter>
         <Routes>
           <Route path="/" element={<DonationPage />} />
+          <Route path="/adopt" element={<AdoptPage />} />
+          <Route path="/adopt/:id" element={<AdoptBioPage />} />
+          <Route path="/adopt/:id/form" element={<AdoptForm />} />
         </Routes>
     </BrowserRouter>
   )
