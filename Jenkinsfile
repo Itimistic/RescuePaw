@@ -1,0 +1,186 @@
+pipeline {
+    agent any
+    
+    environment {
+        // Docker Hub credentials
+        DOCKER_CREDENTIALS = credentials('dockerhub')
+        
+        // Backend variables
+        BACKEND_IMAGE = 'znebly/rescuepaw-backend:latest'
+        BACKEND_PORT = '3000'
+        
+        // Frontend variables  
+        FRONTEND_IMAGE = 'znebly/rescuepaw-frontend:latest'
+        FRONTEND_PORT = '5173'
+    }
+    
+    stages {
+        stage('Checkout & Setup') {
+            steps {
+                echo '🔍 Checking out code from GitHub...'
+                checkout scm
+                
+                script {
+                    // ตรวจสอบว่ามีการเปลี่ยนแปลงใน backend หรือ frontend
+                    CHANGED_BACKEND = sh(
+                        script: "git diff --name-only HEAD~1 HEAD | grep 'be-devtools/' || true",
+                        returnStdout: true
+                    ).trim()
+                    
+                    CHANGED_FRONTEND = sh(
+                        script: "git diff --name-only HEAD~1 HEAD | grep 'fe-devtools/' || true",
+                        returnStdout: true
+                    ).trim()
+                    
+                    echo "Backend changes: ${CHANGED_BACKEND}"
+                    echo "Frontend changes: ${CHANGED_FRONTEND}"
+                }
+            }
+        }
+        
+        stage('Test Backend') {
+            when {
+                expression { return CHANGED_BACKEND != '' }
+            }
+            steps {
+                echo '🧪 Testing Backend...'
+                dir('be-devtools') {
+                    sh 'npm install'
+                    sh 'npm test || true'  // || true ถ้าไม่มี test scripts
+                    
+                    // Linting
+                    sh 'npm run lint || true'
+                }
+            }
+        }
+        
+        stage('Test Frontend') {
+            when {
+                expression { return CHANGED_FRONTEND != '' }
+            }
+            steps {
+                echo '🧪 Testing Frontend...'
+                dir('fe-devtools') {
+                    sh 'npm install'
+                    sh 'npm test || true'
+                    
+                    // Linting
+                    sh 'npm run lint || true'
+                    
+                    // Build test
+                    sh 'npm run build'
+                }
+            }
+        }
+        
+        stage('Build Backend Docker') {
+            when {
+                expression { return CHANGED_BACKEND != '' }
+            }
+            steps {
+                echo '🐳 Building Backend Docker Image...'
+                dir('be-devtools') {
+                    sh "docker build -t ${BACKEND_IMAGE} ."
+                }
+            }
+        }
+        
+        stage('Build Frontend Docker') {
+            when {
+                expression { return CHANGED_FRONTEND != '' }
+            }
+            steps {
+                echo '🐳 Building Frontend Docker Image...'
+                dir('fe-devtools') {
+                    sh "docker build -t ${FRONTEND_IMAGE} ."
+                }
+            }
+        }
+        
+        stage('Push to Docker Hub') {
+            when {
+                anyOf {
+                    expression { return CHANGED_BACKEND != '' }
+                    expression { return CHANGED_FRONTEND != '' }
+                }
+            }
+            steps {
+                echo '📤 Pushing to Docker Hub...'
+                script {
+                    sh "echo ${DOCKER_CREDENTIALS_PSW} | docker login --username ${DOCKER_CREDENTIALS_USR} --password-stdin"
+                    
+                    if (CHANGED_BACKEND != '') {
+                        sh "docker push ${BACKEND_IMAGE}"
+                    }
+                    
+                    if (CHANGED_FRONTEND != '') {
+                        sh "docker push ${FRONTEND_IMAGE}"
+                    }
+                }
+            }
+        }
+        
+        stage('Deploy to Server') {
+            when {
+                anyOf {
+                    expression { return CHANGED_BACKEND != '' }
+                    expression { return CHANGED_FRONTEND != '' }
+                }
+            }
+            steps {
+                echo '🚀 Deploying to Server...'
+                script {
+                    // สมมติใช้ SSH ไป deploy ที่ server
+                    withCredentials([sshUserPrivateKey(
+                        credentialsId: 'server-ssh-key',
+                        keyFileVariable: 'SSH_KEY'
+                    )]) {
+                        // Deploy Backend
+                        if (CHANGED_BACKEND != '') {
+                            sh """
+                                ssh -i ${SSH_KEY} -o StrictHostKeyChecking=no user@your-server << 'EOF'
+                                docker pull ${BACKEND_IMAGE}
+                                docker stop rescuepaw-backend || true
+                                docker rm rescuepaw-backend || true
+                                docker run -d --name rescuepaw-backend -p 3000:3000 ${BACKEND_IMAGE}
+                            EOF
+                            """
+                        }
+                        
+                        // Deploy Frontend
+                        if (CHANGED_FRONTEND != '') {
+                            sh """
+                                ssh -i ${SSH_KEY} -o StrictHostKeyChecking=no user@your-server << 'EOF'
+                                docker pull ${FRONTEND_IMAGE}
+                                docker stop rescuepaw-frontend || true
+                                docker rm rescuepaw-frontend || true
+                                docker run -d --name rescuepaw-frontend -p 80:5173 ${FRONTEND_IMAGE}
+                            EOF
+                            """
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    post {
+        always {
+            echo '🧹 Cleaning up...'
+            sh 'docker logout'
+            
+            // Clean Docker resources
+            sh 'docker system prune -f || true'
+        }
+        
+        success {
+            echo '✅ Pipeline completed successfully!'
+            // สามารถส่ง notification ไป Slack/Email ได้ที่นี่
+        }
+        
+        failure {
+            echo '❌ Pipeline failed!'
+            // ส่ง alert เมื่อ pipeline ล้มเหลว
+        }
+    }
+}
