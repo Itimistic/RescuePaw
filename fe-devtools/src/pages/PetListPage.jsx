@@ -5,7 +5,7 @@ import PetListSection from "../components/PetListSection";
 
 const PetListPage = () => {
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-green-500 relative pt-25">
+    <div className="flex flex-col items-center justify-center min-h-screen bg-green-400 relative pt-25">
       {/* Top Section */}
       <div className="text-center relative z-20">
         <img src={heart} alt="heart" className="w-[55px] mx-auto mb-2" />
@@ -30,7 +30,7 @@ const PetListPage = () => {
           <span className="text-green-600">unconditional love.</span> Will you be{" "}
           <span className="text-green-600">their hero?</span>
         </h1>
-        <p className="mt-4 text-gray-600">
+        <p className="mt-1 font-semibold text-gray-500">
           Browse through our rescued pets and find your perfect companion today.
         </p>
       </div>

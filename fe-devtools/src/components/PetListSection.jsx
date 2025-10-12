@@ -105,7 +105,7 @@ const PetListSection = () => {
                 onChange={(e) => setFilterSpecies(e.target.value)}
                 className="w-full px-4 py-2 rounded-lg border-2 border-gray-300 focus:border-green-500 focus:outline-none"
               >
-                <option value="">All</option>
+                <option value="All">All</option>
                 <option value="dog">Dog</option>
                 <option value="cat">Cat</option>
               </select>
@@ -119,7 +119,7 @@ const PetListSection = () => {
                 onChange={(e) => setFilterGender(e.target.value)}
                 className="w-full px-4 py-2 rounded-lg border-2 border-gray-300 focus:border-green-500 focus:outline-none"
               >
-                <option value="">All</option>
+                <option value="All">All</option>
                 <option value="male">Male</option>
                 <option value="female">Female</option>
               </select>
@@ -133,7 +133,7 @@ const PetListSection = () => {
                 onChange={(e) => setFilterSize(e.target.value)}
                 className="w-full px-4 py-2 rounded-lg border-2 border-gray-300 focus:border-green-500 focus:outline-none"
               >
-                <option value="">All</option>
+                <option value="All">All</option>
                 <option value="small">Small</option>
                 <option value="medium">Medium</option>
                 <option value="large">Large</option>
@@ -148,7 +148,7 @@ const PetListSection = () => {
                 onChange={(e) => setFilterStatus(e.target.value)}
                 className="w-full px-4 py-2 rounded-lg border-2 border-gray-300 focus:border-green-500 focus:outline-none"
               >
-                <option value="">All</option>
+                <option value="All">All</option>
                 <option value="available">Available</option>
                 <option value="adopted">Adopted</option>
               </select>
@@ -169,7 +169,6 @@ const PetListSection = () => {
             <div
               key={pet.id}
               className="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transform hover:-translate-y-2 transition cursor-pointer"
-              onClick={() => setSelectedPet(pet)}
             >
               {/* Pet Image */}
               <div className="relative h-64 overflow-hidden">

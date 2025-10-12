@@ -21,7 +21,7 @@ const Pet = sequelize.define("Pet", {
         type: DataTypes.ENUM("small", "medium", "large"),
     },
     image: {
-        type: DataTypes.STRING,
+        type: DataTypes.TEXT, //เพิ่มขนาด image
     },
     status: {
         type: DataTypes.ENUM('available', 'adopted'),
