@@ -56,7 +56,7 @@ const DonationPage = () => {
               <div className="flex flex-col gap-7">
                 <div className="border-l-4 border-amber-400 pl-4">
                   <h4 className="font-semibold text-lg mb-2 text-gray-800">Stray Dog from the City</h4>
-                  <p className="text-gray-600 text-medium">
+                  <p className="text-gray-600 text-sm">
                     This dog was found in a small alley in Bangkok. Our team has been providing food and water daily until it became familiar with us.
                     Your donation helps us care for and find new homes for stray dogs like this.
                   </p>
@@ -64,7 +64,7 @@ const DonationPage = () => {
 
                 <div className="border-l-4 border-amber-400 pl-4">
                   <h4 className="font-semibold text-lg mb-2 text-gray-800">Abandoned Cats</h4>
-                  <p className="text-gray-600 text-medium">
+                  <p className="text-gray-600 text-sm">
                     Many cats have been abandoned in communities. Our team provides food, vaccines, and temporary shelter.
                     Your donation ensures their safety and good health.
                   </p>
@@ -72,7 +72,7 @@ const DonationPage = () => {
 
                 <div className="border-l-4 border-amber-400 pl-4">
                   <h4 className="font-semibold text-lg mb-2 text-gray-800">Spaying and Neutering</h4>
-                  <p className="text-gray-600 text-medium">
+                  <p className="text-gray-600 text-sm">
                     Spaying and neutering helps control the stray animal population, reduces their suffering, and prevents disease.
                     Every donation helps this program continue.
                   </p>
@@ -80,7 +80,7 @@ const DonationPage = () => {
 
                 <div className="border-l-4 border-amber-400 pl-4">
                   <h4 className="font-semibold text-lg mb-2 text-gray-800">The Importance of Donations</h4>
-                  <p className="text-gray-600 text-medium">
+                  <p className="text-gray-600 text-sm">
                     Your donations are used to buy food, medicine, vaccines, and animal care supplies.
                     Every baht matters to the lives of stray animals and brings them hope.
                   </p>
@@ -90,6 +90,15 @@ const DonationPage = () => {
           </div>
         </div>
       </section>
+
+      <footer className="bg-amber-400 text-white py-8 text-center w-full">
+        <p className="text-lg font-semibold">© 2025 RescuePaw | All Rights Reserved</p>
+        <div className="flex justify-center gap-6 mt-3">
+          <a href="#" className="hover:text-indigo-800">Facebook</a>
+          <a href="#" className="hover:text-indigo-800">Instagram</a>
+          <a href="#" className="hover:text-indigo-800">Contact Us</a>
+        </div>
+      </footer>
 
     </div>
   )

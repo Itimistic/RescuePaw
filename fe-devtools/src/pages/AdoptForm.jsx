@@ -80,7 +80,7 @@ const AdoptForm = ({ petName }) => {
   }
 
   return (
-    <div className="min-h-screen bg-amber-50 py-12 px-6 lg:px-32">
+    <div className="min-h-screen bg-amber-50 py-12 px-6 lg:px-32 mt-20">
       <h1 className="text-4xl font-bold text-amber-600 mb-6 text-center">
         Adoption Form for {petName}
       </h1>

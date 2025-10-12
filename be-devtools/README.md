@@ -11,6 +11,8 @@ goood-comfy-snappy-likes
 
 - check: stripe listen
 - stripe listen --forward-to localhost:3000/webhook
+- stripe trigger checkout.session.completed
+- 4242424242424242
 
 STEP 1 -backup db
 ----------------------

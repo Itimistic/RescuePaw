@@ -1,7 +1,7 @@
 .report-table-container {
   width: 95%;
   max-width: 1200px;
-  margin: 30px auto;
+  margin: 100px auto;
   background-color: #fffafc;
   border-radius: 20px;
   padding: 35px;
@@ -101,12 +101,12 @@
   box-shadow: 0 5px 15px rgba(255, 111, 145, 0.5);
 }
 
-p {
+/* p {
   text-align: center;
   font-size: 1.2rem;
   color: #777;
   margin: 20px 0;
-}
+} */
 
 /* สำหรับหน้าจอมือถือ */
 @media (max-width: 768px) {

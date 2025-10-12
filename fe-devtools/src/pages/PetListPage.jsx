@@ -1,11 +1,13 @@
 import { useState } from "react";
 import heart from "../assets/pet_list/heart.png";
 import a4 from "../assets/pet_list/a4.png"
+import adopt from "../assets/pet_list/adopt.png"
 import PetListSection from "../components/PetListSection";
+
 
 const PetListPage = () => {
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-green-500 relative pt-25">
+    <div className="flex flex-col items-center justify-center min-h-screen bg-green-400 relative pt-25">
       {/* Top Section */}
       <div className="text-center relative z-20">
         <img src={heart} alt="heart" className="w-[55px] mx-auto mb-2" />
@@ -15,7 +17,11 @@ const PetListPage = () => {
 
       {/* Middle Section with Image */}
       <div className="relative w-full flex justify-center z-30 -mt-10">
-        {/* animal อยู่ด้านหน้า */}
+        {/* <img
+          src={adopt}
+          alt="donate"
+          className="absolute  top-1/3 w-fit -translate-y-1/2 opacity-30 z-10"
+        /> */}
         <img
           src={a4}
           alt="animal"
@@ -36,7 +42,18 @@ const PetListPage = () => {
       </div>
 
       <PetListSection />
+
+      <footer className="bg-green-400 text-white py-8 text-center w-full">
+        <p className="text-lg font-semibold">© 2025 RescuePaw | All Rights Reserved</p>
+        <div className="flex justify-center gap-6 mt-3">
+          <a href="#" className="hover:text-indigo-800">Facebook</a>
+          <a href="#" className="hover:text-indigo-800">Instagram</a>
+          <a href="#" className="hover:text-indigo-800">Contact Us</a>
+        </div>
+      </footer>
     </div>
+
+
   );
 };
 

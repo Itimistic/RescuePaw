@@ -37,7 +37,7 @@ const AdminAdoptPage = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gray-100 p-8">
+    <div className="min-h-screen bg-gray-100 p-8 mt-20">
       <h1 className="text-3xl font-bold mb-6">Admin Adopt Forms</h1>
 
       <div className="overflow-x-auto bg-white rounded-lg shadow">

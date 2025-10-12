@@ -17,7 +17,7 @@ const Navbar = () => {
   return (
     <nav className="fixed top-0 left-0 z-50 w-full backdrop-blur-lg shadow-lg">
       <div className="max-w-7xl mx-auto flex items-center justify-between p-5">
-        <Link to={path("/pets")} className="flex items-center gap-2 text-black font-bold text-3xl">
+        <Link to={path("/")} className="flex items-center gap-2 text-black font-bold text-3xl">
           <PawPrint size={32} className="text-red-500 fill-red-500" />
           RescuePaw
         </Link>
@@ -38,7 +38,7 @@ const Navbar = () => {
             Adopt
           </Link>
           <Link
-            to={path("/report")}
+            to={path("/reportform")}
             className="bg-black text-white px-5 py-2 rounded-xl font-bold flex items-center gap-2 shadow hover:shadow-lg transition"
           >
             <PlusCircle size={18} />

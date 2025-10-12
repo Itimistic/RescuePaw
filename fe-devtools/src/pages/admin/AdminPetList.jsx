@@ -7,10 +7,21 @@ function AdminPetList() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    axios
-      .get("http://localhost:3000/api/pets")
-      .then((res) => setPets(res.data))
-      .catch((err) => console.error(err));
+    const getPet = async () => {
+      try {
+        const res = await fetch(`${import.meta.env.VITE_API_SERVER_BASE_URL}/api/pets`, {
+          method: "GET",
+          headers: { "Content-Type": "application/json" },
+        });
+
+        const data = await res.json();
+        console.log("data1:", data.data);
+        setPets(data.data);
+      } catch (error) {
+        console.log("error:", error);
+      }
+    };
+    getPet();
   }, []);
 
   const handleDelete = async (id) => {

@@ -26,8 +26,8 @@ const PetListSection = () => {
 
         const data = await res.json();
         console.log("data1:", data);
-        setPets(data.data);
-        setFilteredPets(data.data);
+        setPets(data);
+        setFilteredPets(data);
       } catch (error) {
         console.log("error:", error);
       }

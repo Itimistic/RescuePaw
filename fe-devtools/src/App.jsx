@@ -27,22 +27,18 @@ import AdminPetList from "./pages/admin/AdminPetList"; // admin-facing
 import PetForm from "./pages/PetForm";
 import LoginPage from "./pages/LoginPage";
 import ProtectedRoute from "./components/ProtectedRoute";
+import HomePage from "./pages/HomePage"
 const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY);
 
 function App() {
   return (
     <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<DonationPage />} />
-          <Route path="/adopt" element={<PetListPage />} />
-          <Route path="/adopt/:id" element={<AdoptBioPage />} />
-          <Route path="/adopt/form/:id" element={<AdoptForm />} />
-          <Route path="/admin/adopt" element={<AdminAdoptPage />} />
-          <Route path="/admin/adopt/:id" element={<AdminAdoptDetailPage />} />
-        </Routes>
-      
       <Navbar />
       <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/adopt" element={<PetListPage />} />
+        <Route path="/adopt/:id" element={<AdoptBioPage />} />
+        <Route path="/adopt/form/:id" element={<AdoptForm />} />
         {/* Public routes */}
         <Route path="/login" element={<LoginPage />} />
         <Route 
@@ -71,7 +67,7 @@ function App() {
 
         {/* Admin routes */}
         <Route
-          path="/admin/pets"
+          path="/admin"
           element={
             <ProtectedRoute adminOnly={true}>
               <AdminPetList />
@@ -111,10 +107,26 @@ function App() {
           }
         />
         <Route
-          path="/admin/report" 
+          path="/admin/reportform" 
           element={
             <ProtectedRoute adminOnly={true}>
               <ReportPage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/admin/adopt" 
+          element={
+            <ProtectedRoute adminOnly={true}>
+              <AdminAdoptPage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/admin/adopt/:id" 
+          element={
+            <ProtectedRoute adminOnly={true}>
+              <AdminAdoptDetailPage />
             </ProtectedRoute>
           }
         />

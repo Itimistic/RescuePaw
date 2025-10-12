@@ -3,11 +3,12 @@ const Pet = require("../models/pet");
 // Get all 
 exports.getAllPets = async (req, res) => {
   // console.log("yess")
+  // console.log("yess")
   try {
     const pets = await Pet.findAll({
       order: [['createdAt', 'DESC']],
     });
-
+    console.log("pets: ", pets)
     res.status(200).json({
       success: true,
       data: pets,
@@ -27,7 +28,7 @@ exports.getAllPets = async (req, res) => {
 exports.getPetById = async (req, res) => {
   try {
     const pet = await Pet.findByPk(req.params.id);
-    // console.log(pet)
+    console.log(pet)
     if (!pet) return res.status(404).json({ message: "Pet not found" });
     res.json({ data: pet });
   } catch (err) {

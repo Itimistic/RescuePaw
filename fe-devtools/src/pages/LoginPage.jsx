@@ -15,9 +15,9 @@ function LoginPage() {
 
       // redirect based on role
       if (user.role === "admin") {
-        navigate("/admin/pets");
+        navigate("/admin");
       } else {
-        navigate("/pets");
+        navigate("/");
       }
     } catch (err) {
       alert("Invalid username or password");

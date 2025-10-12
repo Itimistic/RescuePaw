@@ -39,7 +39,7 @@ function PetForm() {
       } else {
         await axios.post("http://localhost:3000/api/pets", pet);
       }
-      navigate("/admin/pets");
+      navigate("/admin");
     } catch (err) {
       console.error(err);
     }
@@ -53,7 +53,7 @@ function PetForm() {
             {isEdit ? "Edit Pet" : "Add New Pet"}
           </h2>
           <Link
-            to="/admin/pets"
+            to="/admin"
             className="text-sm text-gray-600 hover:text-orange-600 transition-all"
           >
             ← Back to Pet List

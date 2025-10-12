@@ -16,8 +16,6 @@ const webhookRoutes = require("./routes/webhookRoutes")
 
 app.use("/webhook", webhookRoutes)
 // app.use(cors()); 
-const userRoutes = require("./routes/userRoutes")
-const petRoutes = require("./routes/petRoutes")
 const authRoutes = require("./routes/authRoutes");
 const { verifyToken, verifyAdmin } = require("./middleware/authMiddleware");
 
